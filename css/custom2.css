@@ -1,0 +1,145 @@
+/* ----------------------------------------------------------------
+	Custom CSS
+
+	Add all your Custom Styled CSS here for New Styles or
+	Overwriting Default Theme Styles for Better Handling Updates
+-----------------------------------------------------------------*/
+
+
+ .custom-list {
+  padding-left: 20px;   /* Adjust the left indentation */
+  margin: 0;            /* Remove default margin */
+  }
+
+ .custom-list li {
+  margin-bottom: 10px;  /* Add space between list items */
+  }
+
+.icon-double-size {
+  font-size: 4em;
+}
+
+.canvas-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+@media (max-width: 990px) {
+    .language-separator {
+        display: none;
+    }
+}
+
+/* By default hide the full language name */
+.full-lang {
+    display: none;
+}
+
+@media (max-width: 990px) {
+    /* On mobile, hide the short language name */
+    .short-lang {
+        display: none;
+    }
+    
+    /* And show the full language name */
+    .full-lang {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 768px) {
+			.feature-box-border-horizontal .feature-box { position: relative; }
+
+			.feature-box-border-horizontal .feature-box:not(.noborder) .fbox-icon::before,
+			.feature-box-border-horizontal.border-hover-animate .feature-box:not(.noborder) .fbox-icon::after {
+				content: "";
+				position: absolute;
+				top: 31px;
+			    left: calc(50% + 32px);
+			    width: calc(100% - 64px);
+				height: 2px;
+				border: 1px solid #EEE;
+				z-index: 0;
+			}
+
+			.feature-box-border-horizontal.border-dashed .feature-box:not(.noborder) .fbox-icon::before,
+			.feature-box-border-horizontal.border-dashed.border-hover-animate .feature-box:not(.noborder) .fbox-icon::after {
+				border-style: dashed;
+			}
+
+			.feature-box-border-horizontal.border-hover-animate .feature-box:not(.noborder) .fbox-icon::after {
+				display: block;
+				border-color: #222;
+				width: 0;
+				transform-origin: top left;
+				transition: width .3s ease-in-out;
+			}
+
+			/* .feature-box-border-horizontal .feature-box:not(.noborder):nth-child(1) .fbox-icon::before { background-color: #222; } */
+
+			.feature-box-border-horizontal.border-hover-animate .feature-box:not(.noborder):hover .fbox-icon::after {  width: calc(100% - 64px); }
+
+
+			.feature-box-border-horizontal .fbox-icon i,
+			.feature-box-border-horizontal .fbox-border.fbox-light .fbox-icon i {
+				line-height: 60px;
+				font-size: 24px;
+				z-index: 1;
+				text-align: center;
+				box-shadow: 0 0 0px 10px #FFF;
+			}
+
+			.feature-box-border-horizontal .feature-box.flex-column:not(.noborder) .fbox-icon::before,
+			.feature-box-border-horizontal.border-hover-animate .feature-box.flex-column:not(.noborder) .fbox-icon::after {
+				left: calc(0% + 100px);
+			}
+		}
+		
+
+    .equal-height {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .equal-height .content {
+        flex: 1;
+    }
+	
+
+@media (max-width: 767px) {
+    #slider2 {
+        display: none;
+    }
+}
+
+#header2 {
+    position: relative; /* Set position to relative */
+}
+
+#slider2 {
+    position: absolute;
+    top: 0; /* Align to the top of the viewport */
+    left: 0; /* Align to the left of the viewport */
+    width: 100%; /* Ensure it spans the full width of the viewport */
+    z-index: 0; /* Ensure it overlays on top of other content */
+    opacity: 1;
+    transition: opacity 0.5s; /* smooth transition for fading effect */
+}
+
+/* By default, hide the mobile contact link */
+.mobile-contact {
+    display: none;
+}
+
+/* Show the mobile contact link and hide the desktop contact div on mobile screens */
+@media (max-width: 768px) {
+    .desktop-contact {
+        display: none;
+    }
+
+    .mobile-contact {
+        display: block;
+    }
+}

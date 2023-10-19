@@ -1,0 +1,47 @@
+/* Set the body and html to 100% height to allow the container to take the full height */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* Set the container-fluid class to A4 dimensions */
+.container-fluid {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    padding: 5mm;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Adjust the padding and margins for the rows and paragraphs to fit the content within the A4 dimensions */
+.row {
+    margin: 0;
+}
+
+p {
+    margin: 0;
+    padding: 5px;
+    font-size: 10px; /* Adjust the font size as needed */
+}
+
+/* Print styles */
+@media print {
+    .container-fluid {
+        box-shadow: none;
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+.monospace-font {
+    font-family: 'Inconsolata', monospace; /* Replace with your desired font */
+    font-size: 8px; /* Adjust the size as needed */
+    color: #333; /* Adjust the color as needed */
+	line-height: 1.35;
+}
+
+.small-print {
+    font-size: 6px; /* Adjust the font size for readability */
+    color: #666; /* Choose a color that is not too bright for readability */
+    line-height: 1.4; /* Adjust the line height for better readability */
+}
+
