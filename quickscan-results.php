@@ -513,7 +513,7 @@ else{
 			
 		============================================= -->
 	<form action="" method="post">
-			<input type="hidden" id="data-input" value="<?=$_SESSION['quesVal_mul_weight'][0] / $_SESSION['weightSum'][0];?>,<?=$_SESSION['quesVal_mul_weight'][1] / $_SESSION['weightSum'][1];?>,<?=$_SESSION['quesVal_mul_weight'][2] / $_SESSION['weightSum'][2];?>,<?=$_SESSION['quesVal_mul_weight'][3] / $_SESSION['weightSum'][3];?>,<?=$_SESSION['quesVal_mul_weight'][4] / $_SESSION['weightSum'][4];?>,<?=$_SESSION['quesVal_mul_weight'][5] / $_SESSION['weightSum'][5];?>,<?=$_SESSION['quesVal_mul_weight'][6] / $_SESSION['weightSum'][6];?>">
+			<input type="hidden" id="data-input" value="<?=$_SESSION['weightSum'][0];?>,<?=$_SESSION['weightSum'][1];?>,<?=$_SESSION['weightSum'][2];?>,<?=$_SESSION['weightSum'][3];?>,<?=$_SESSION['weightSum'][4];?>,<?=$_SESSION['weightSum'][5];?>,<?=$_SESSION['weightSum'][6];?>">
 		<section id="content">
 
 			<div class="content-wrap">
