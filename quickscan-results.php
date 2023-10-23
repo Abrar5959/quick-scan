@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 require_once('db.php');
 if (isset($_POST['generate-quickscan-submit'])) {
 	if (isset($_SESSION['pillarArray'])) {
@@ -75,15 +79,18 @@ if (isset($_POST['generate-quickscan-submit'])) {
 
 		if ($stmt->execute()) {
 			unset($_SESSION['pillarArray']);
-			unset($_SESSION['id']);
+			$stmt->close();
+			$conn->close();
+			// unset($_SESSION['id']);
 
 			// Update was successful.
-			echo "<script>alert('Your form has been successfully submitted!');</script>";
+			echo "<script>window.location.replace('pdf.php')</script>";
+			// echo "<script>alert('Your form has been successfully submitted!');</script>";
 		} else {
 			echo "Error: " . $stmt->error;
+			$stmt->close();
+			$conn->close();
 		}
-		$stmt->close();
-		$conn->close();
 	} else {
 		echo "<script>window.location.href='quickscan.php';</script>";
 	}
@@ -583,7 +590,7 @@ else{
 											<p>
 												<label for="email">Email Address to send your report to:</label><br>
 
-												<input type="email" id="email" name="email" placeholder="Enter your business email address" required>
+												<input type="email" class="form-control" id="email" name="email" placeholder="Enter your business email address" required>
 
 											</p>
 
@@ -617,7 +624,7 @@ else{
 										<div class="col-md-6">
 											<p>
 												<label for="companyName">Company Name:</label><br>
-												<input type="text" id="companyName" name="companyName" placeholder="Enter company name" required>
+												<input type="text" id="companyName" class="form-control" name="companyName" placeholder="Enter company name" required>
 
 											</p>
 										</div>
@@ -640,7 +647,7 @@ else{
 											<p>
 												<label for="phone">Your phone Number:</label><br>
 
-												<input type="tel" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
+												<input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}">
 												(optional)
 											</p>
 										</div>
@@ -1021,6 +1028,43 @@ else{
 	
 	<script src="js/jquery.js"></script>
 	<script>
+
+
+	function saveChartAsImage(imageData) {
+		// console.log("checkpoint 2");
+	    $.ajax({
+			type: 'POST',
+			url: 'ajax_api.php', // Change this to the path of your PHP script
+			data: { image: imageData },
+			success: function (response) {
+				// Handle the response from the PHP script
+				console.log(response);
+			}
+    	});
+
+
+		// myChart.render(); // Render the chart
+		// console.log("checkpoint 2.1");
+	    // myChart.toBase64Image('image/png', 1.0, 1000, 1000, function(imageData) {
+		// console.log("checkpoint 2.2");
+        // // imageData contains the base64 encoded image
+        // $.ajax({
+        //     type: 'POST',
+        //     url: 'ajax_api.php', // Change this to the path of your PHP script
+        //     data: { image: imageData },
+        //     success: function (response) {
+		// 		console.log("checkpoint 2.3");
+        //         // Handle the response from the PHP script
+        //         console.log(response);
+        //     }
+        // });
+    // });
+
+	}
+
+
+
+
 	const dataInput = document.getElementById('data-input').value;
 	const dataValues = dataInput.split(',').map(Number);
 
@@ -1101,6 +1145,12 @@ else{
 	type: 'polarArea',
 	data: data,
 	options: {
+		animation: {
+      		onComplete: function () {
+ 	         imageData = myChart.toBase64Image();
+			 saveChartAsImage(imageData);
+			}
+	    },
 		responsive: true,
 		scales: {
 		r: {
@@ -1128,6 +1178,24 @@ else{
 
 	const ctx = document.getElementById('myChart').getContext('2d');
 	const myChart = new Chart(ctx, config);
+	// console.log("checkpoint1");
+	
+	// var imageData = myChart.toBase64Image();
+	// console.log(imageData);
+	
+	// setTimeout(saveChartAsImage(myChart), 1000);
+
+
+	// myChart.render(function () {
+	// 	// Export the chart as an image when it's fully loaded
+	// 	console.log("checkpoint2");
+	// 	var imageData = chart.toBase64Image();
+	// 	saveChartAsImage(imageData);
+	// });
+
+	// console.log("checkpoint3");
+
+
 </script>
 
 	<script src="js/functions.js"></script>
