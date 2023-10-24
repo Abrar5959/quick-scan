@@ -3,9 +3,11 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-if (!isset($_SESSION['id'])) {
-    echo "<script>window.location.replace(quickscan.php)</script>";
-}
+// if (isset($_SESSION['id'])) {
+//     echo "<script>window.location.replace('quickscan.php')</script>";
+// }
+// else{
+// }
 require_once('db.php');
 
 
@@ -25,6 +27,21 @@ function insert_MultiCell($pdf, $X = 0, $Y = 0, $width=0 ,$height=0 ,$text='' ,$
 
 $id = $_SESSION['id'];
 
+$query = "SELECT * FROM surveydata WHERE `id` = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+$row = $result->fetch_assoc();
+
+$id              = $row['id'];
+$companyName     = $row['companyName'];
+$business_sector = $row['business_sector'];
+$date            =  date("d-m-Y"); // DD-MM-YYYY format
+
+
+
 
 require_once('fpdf/fpdf.php');
 require_once('fpdf/extension.php');
@@ -40,29 +57,24 @@ $pdf->SetXY($x,$y);
 $pdf->SetFont("Arial", "", "15");
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth = 0, $CellHeight = 0, $text = "AI Readiness Quickscan", $border = 0, $alignment = 'L', $fill = false);
 
-$pdf->Image('images/onepager-polarchart.png',130,10,70,0);
+$pdf->Image('output-graph/chart.png',130,6,60,0);
 
 $pdf->SetFont("Arial", "", "8");
 
-// $x = 10;
-// $y = 20;
-// $pdf->SetXY($x,$y);
-// $text = "Report for: [company name]";
-// $pdf->MultiCell(100,6,$text,1);
-
 $x = 10;
 $y = 20;
-$text = "Report for: [company name]";
+$pdf->SetXY($x,$y);
+$text = "Report for: {$companyName}";
+$pdf->MultiCell(100,6,$text,0);
+
+$x = 10;
+$y = $pdf->GetY();
+$text = "Sector: {$business_sector}";
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=100 ,$height=6 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 $x = 10;
 $y = $pdf->GetY();
-$text = "Sector: [sector]";
-insert_MultiCell($pdf, $X = $x, $Y = $y, $width=100 ,$height=6 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
-
-$x = 10;
-$y = $pdf->GetY();
-$text = "Date generated: [date]";
+$text = "Date generated: {$date}";
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=100 ,$height=6 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 $x = 10;
@@ -75,7 +87,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.7 ,$text=$text ,$
 
 $pdf->SetFont("Arial", "", "10");
 $x = 18;
-$y = 70;
+$y = 65;
 $text = "AI Trends";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/telescope.png',$x-10,$y+2,8,0);
@@ -252,7 +264,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.2 ,$text=$text ,$
 // insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
-$pdf->SetFont("Arial", "", "10");
+$pdf->SetFont("Arial", "B", "10");
 $x = 8;
 $y = $pdf->GetY()+4;
 $text = "AI Impact on your organization";
@@ -265,8 +277,24 @@ $y = $pdf->GetY()+1;
 $text = "The continuous learning and adaptation fostered by AI is nurturing a culture of perpetual improvement within our organization, stimulating a forward-thinking mindset among our teams. By closely monitoring the evolving AI landscape and actively engaging in community dialogues around responsible AI, we are not only staying ahead of technological advancements but also fostering a robust ethical foundation that underscores our AI-driven initiatives.";
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
+$pdf->SetFont("Arial", "B", "9");
+$y = $pdf->GetY()+2;
+$text = "Get grip and direction on your AI transformation journey.";
+insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
+
+$pdf->SetFont("Arial", "", "5");
+$y = $pdf->GetY()+2;
+$text = " Explanation of the levels used: Level 1 - Initial: Minimal engagement with AI, characterized by a lack of awareness or understanding. Level 2 - Aware: Basic awareness of AI exists, but no structured initiatives are in place. Level 3 - Operational: AI initiatives are operational with a defined strategy, delivering initial value. Level 4 - Integrated: AI is well-integrated across functions, with growing expertise and value realization. Level 5 - Optimized: AI is optimized, driving innovation, and is a core part of organizational strategy, delivering significant value.
+The information provided herein is a high-level assessment and is intended for informational purposes only. It does not constitute professional advice, nor does it delve into the detailed analysis or specific strategies related to the integration and management of AI within the organization. Readers are advised to seek professional consultation to obtain a comprehensive and detailed analysis tailored to their specific organizational context and needs.";
+insert_MultiCell($pdf, $X = $x, $Y = $y, $width=150 ,$height=2.8 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
+$pdf->Image('images/logo.png',170,$y-7,25);
+// $y = $pdf->GetY()+2;
+$pdf->SetFont("Arial", "", "6");
+$text = " A holistic approach to AI Transformation within your business.
+www.dynaminds.ai | info@dynaminds.ai ";
+insert_MultiCell($pdf, $X = 160, $Y = $y+7, $width=45 ,$height=2.8 ,$text=$text ,$border=0 ,$alignment='C' ,$fill=false);
 
 
 
