@@ -51,7 +51,7 @@ $pdf->AddPage();
 $pdf->SetAutoPageBreak(true,0);
 $pdf->SetMargins(0,0,0);
 
-$x = 7;
+$x = 10;
 $y = 10;
 $pdf->SetXY($x,$y);
 $pdf->SetFont("Arial", "", "15");
@@ -104,7 +104,7 @@ $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Arial", "", "7");
 $text = "                               Invest in ongoing AI education to equip your team with the skills needed to maximize AI's potential.";
-insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
+insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 // ===============================
 
