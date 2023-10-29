@@ -308,235 +308,114 @@ else{
 }
 ?>
 <!DOCTYPE html>
-
 <html dir="ltr" lang="en-US">
-
 <head>
-
-
-
 	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-
 	<meta http-equiv="x-ua-compatible" content="IE=edge">
-
 	<meta name="description" content="Dynaminds | Quickscan Results">
-
-
-
 	<!-- Font Imports -->
-
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@400;700&family=Merriweather&display=swap" rel="stylesheet">
-
-
-
 	<!-- Core Style -->
-
 	<link rel="stylesheet" href="style2.css">
-
-
 	<!-- Font Icons -->
-
 	<link rel="stylesheet" href="css/font-icons.css">
-
 	<link rel="stylesheet" href="one-page/css/et-line.css">
-
-
-
 	<!-- Plugins/Components CSS -->
-
 	<link rel="stylesheet" href="css/components/bs-switches.css">
-
-
-
 	<!-- Niche Demos -->
-
 	<link rel="stylesheet" href="demos/app-landing/app-landing2.css">
-
-
-
 	<!-- Custom CSS -->
-
 	<link rel="stylesheet" href="css/custom2.css">
-
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-
 	<!-- Favicons -->
-
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 	<link rel="manifest" href="/site.webmanifest">
-
-
-	<!-- Document Title
-			
-		============================================= -->
-
+	<!-- Document Title ============================================= -->
 	<title>Dynaminds | Quickscan Results</title>
-
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
-
-
-
 <body class="stretched">
-
-	<!-- Header
-			
-		============================================= -->
-
+	<!-- Header ============================================= -->
 	<section id="slider2" class="slider-element include-header" style="height: 200px; z-index: 0; position: absolute;">
 		<div class="slider-inner" id="vanta-output"></div>
 	</section>
-
-
 	<header id="header" class="transparent-header dark" data-sticky-class="not-dark" data-responsive-class="not-dark" data-sticky-logo-height="80" data-sticky-menu-padding="29">
-
 		<div id="header-wrap">
-
 			<div class="container">
-
 				<div class="header-row justify-content-lg-between">
-
-
-					<!-- Logo
-							
-						============================================= -->
-
+					<!-- Logo ============================================= -->
 					<div id="logo" class="col-auto order-lg-2 me-lg-0 px-0">
-
 						<a href="index.html">
-
 							<img class="logo-default" srcset="images/logo.png, images/logo@2x.png 2x" src="images/logo@2x.png" alt="Dynaminds Logo">
-
 							<img class="logo-dark" srcset="images/logo-dark.png, images/logo-dark@2x.png 2x" src="images/logo-dark@2x.png" alt="Dynaminds Logo">
-
 						</a>
-
 					</div><!-- #logo end -->
-
-
-
 					<div class="primary-menu-trigger">
-
 						<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
-
 							<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
-
 						</button>
-
 					</div>
-
-
-
-					<!-- Primary Navigation
-							
-						============================================= -->
-
+					<!-- Primary Navigation ============================================= -->
 					<nav class="primary-menu with-arrows col-lg-5 order-lg-1 px-0">
-
-
-
 						<ul class="menu-container one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
-
 							<li class="menu-item"><a class="menu-link" href="index.html">
 									<div>Home</div>
-								</a></li>
-
+								</a>
+							</li>
 							<li class="menu-item"><a class="menu-link" href="index.html#section-bridging-the-gap">
 									<div>Bridging the gap</div>
-								</a></li>
-
+								</a>
+							</li>
 							<li class="menu-item"><a class="menu-link" href="index.html#section-our-approach">
 									<div>Our Approach</div>
-								</a></li>
-
+								</a>
+							</li>
 						</ul>
-
-
-
 					</nav>
-
-
-
 					<nav class="primary-menu col-lg-5 order-lg-3 px-0">
-
-
-
 						<ul class="menu-container justify-content-lg-end one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
-
 							<li class="menu-item"><a class="menu-link">
 									<div>Services</div>
 								</a>
-
 								<ul class="sub-menu-container" data-class="up-lg:not-dark">
-
 									<li class="menu-item"><a class="menu-link" href="state-of-ai-workshop.html">
 											<div>State of AI Workshop</div>
-										</a></li>
-
+										</a>
+									</li>
 									<li class="menu-item"><a class="menu-link" href="ai-advisor-to-the-board.html">
 											<div>AI Advisor to the Board</div>
-										</a></li>
-
+										</a>
+									</li>
 								</ul>
-
 							</li>
-
 							<li class="menu-item contact-item">
 								<!-- <div class="desktop-text" style="font-size: 15px; padding-right: 10px; padding-left: 12px;">Let's get in touch: +31 649767419</div>  Plain text for desktop -->
 								<a class="menu-link mobile" href="tel:+31649767419" style="font-size: 15px;">
 									<div>Let's get in touch: +31 649767419</div>
 								</a> <!-- Link for mobile -->
 							</li>
-
 						</ul>
-
-
-
 					</nav><!-- #primary-menu end -->
-
-
-
 				</div>
-
 			</div>
-
 		</div>
-
 		<div class="header-wrap-clone"></div>
-
 	</header><!-- #header end -->
-
-
-	<!-- Content
-			
-		============================================= -->
+	<!-- Content ============================================= -->
 	<form action="" method="post">
-			<input type="hidden" id="data-input" value="<?=$_SESSION['weightSum'][0];?>,<?=$_SESSION['weightSum'][1];?>,<?=$_SESSION['weightSum'][2];?>,<?=$_SESSION['weightSum'][3];?>,<?=$_SESSION['weightSum'][4];?>,<?=$_SESSION['weightSum'][5];?>,<?=$_SESSION['weightSum'][6];?>">
+			<input type="hidden" id="" value="<?=$_SESSION['weightSum'][0];?>,<?=$_SESSION['weightSum'][1];?>,<?=$_SESSION['weightSum'][2];?>,<?=$_SESSION['weightSum'][3];?>,<?=$_SESSION['weightSum'][4];?>,<?=$_SESSION['weightSum'][5];?>,<?=$_SESSION['weightSum'][6];?>">
+			<input type="hidden" id="data-input" value="12,49,18,25,33,29,45">
 		<section id="content">
-
 			<div class="content-wrap">
-
-
 				<div class="clear mb-5"></div>
-
-
 				<div class="clear"></div>
-
-
 				<div id="section-content" class="page-section pt-5 mb-0">
-
-
 					<div class="container" style="padding-bottom: 120px;">
-
 						<p>
 						<h2 class="text-start text-md-center font-body mb-6">Quickscan Results: Your organization's AI Transformation Readiness</h2>
 						</p>
@@ -586,15 +465,10 @@ else{
 											<strong>Tell us a bit more about your company</strong>
 										</div>
 										<div class="col-md-6">
-
 											<p>
 												<label for="email">Email Address to send your report to:</label><br>
-
 												<input type="email" class="form-control" id="email" name="email" placeholder="Enter your business email address" required>
-
 											</p>
-
-
 										</div>
 										<div class="col-md-6">
 											<p>
@@ -616,8 +490,6 @@ else{
 													<option value="other">Other</option>
 												</select>
 											</p>
-
-
 										</div>
 									</div>
 									<div class="row">
@@ -625,7 +497,6 @@ else{
 											<p>
 												<label for="companyName">Company Name:</label><br>
 												<input type="text" id="companyName" class="form-control" name="companyName" placeholder="Enter company name" required>
-
 											</p>
 										</div>
 										<div class="col-md-6">
