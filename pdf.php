@@ -3,12 +3,25 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-// if (isset($_SESSION['id'])) {
-//     echo "<script>window.location.replace('quickscan.php')</script>";
-// }
-// else{
-// }
+if (isset($_SESSION['id'])) {
+}
+else{
+    // echo "<script>window.location.replace('quickscan.php')</script>";
+}
+
+
 require_once('db.php');
+
+// Include library files 
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
+
+// Import PHPMailer classes into the global namespace 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 
 
 // Custom function to insert the PDF cells
@@ -37,9 +50,116 @@ $row = $result->fetch_assoc();
 
 $id              = $row['id'];
 $companyName     = $row['companyName'];
-$business_sector = $row['business_sector'];
+$receiver_mail   = $row['email'];
 $date            =  date("d-m-Y"); // DD-MM-YYYY format
 
+
+$business_sector                    = $row['business_sector'];
+$sector                    = $row['business_sector'];
+$rate_your_brand                    = $row['rate_your_brand'];
+$organization_knowledge_intensity   = $row['organization_knowledge_intensity'];
+
+
+
+$strategic_advancement  = unserialize($row['strategic_advancement']);
+$operational_efficiency = unserialize($row['operational_efficiency']);
+$quality_enhancement    = unserialize($row['quality_enhancement']);
+$other                  = unserialize($row['other']);
+
+$choices = [];
+
+// Check if unserialization was successful
+if ($strategic_advancement !== false) {
+    // Iterate over the unserialized data
+    // echo "<pre>";
+    // print_r($strategic_advancement);
+    // echo "</pre>";
+    foreach ($strategic_advancement as $key => $item) {
+        if($item ==1)
+        {
+            array_push($choices,$key);
+        }
+    }
+}
+if ($operational_efficiency !== false) {
+    foreach ($operational_efficiency as $key => $item) {
+        if($item ==1)
+        {
+            array_push($choices,$key);
+        }
+    }
+}
+if ($quality_enhancement !== false) {
+    foreach ($quality_enhancement as $key => $item) {
+        if($item ==1)
+        {
+            array_push($choices,$key);
+        }
+    }
+}
+if ($other !== false) {
+    foreach ($other as $key => $item) {
+        if($item ==1)
+        {
+            array_push($choices,$key);
+        }
+    }
+}
+// echo "<pre>";
+// print_r($choices);
+// echo "</pre>";
+
+$ai_goals_high_rank = 0;
+$ai_goals_text = "";
+foreach ($choices as $choice) {
+    $query = "SELECT * FROM ai_goals WHERE `choice` = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param("s", $choice);
+    $stmt->execute();
+    $result = $stmt->get_result();    
+    $row = $result->fetch_assoc();
+
+    if($row['rank'] > $ai_goals_high_rank)
+    {
+        $ai_goals_high_rank = $row['rank'];
+        $ai_goals_text = $row['text'];
+    }
+
+}
+
+
+
+$sub_heading = $business_sector;
+$main_heading    = 'sector_specific';
+$query = "SELECT * FROM textblobs WHERE `main_heading` = ? AND `sub_heading`= ? ";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("ss", $main_heading,$sub_heading);
+$stmt->execute();
+$result = $stmt->get_result();    
+$row = $result->fetch_assoc();
+$business_sector = $row['text'];
+
+
+$sub_heading = $rate_your_brand;
+$main_heading    = 'ai_knowledge_board';
+$query = "SELECT * FROM textblobs WHERE `main_heading` = ? AND `sub_heading`= ? ";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("ss", $main_heading,$sub_heading);
+$stmt->execute();
+$result = $stmt->get_result();    
+$row = $result->fetch_assoc();
+$rate_your_brand = $row['text'];
+
+
+$sub_heading = $organization_knowledge_intensity;
+$main_heading  = 'knowledge_intensity';
+$query = "SELECT * FROM textblobs WHERE `main_heading` = ? AND `sub_heading`= ? ";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("ss", $main_heading,$sub_heading);
+$stmt->execute();
+$result = $stmt->get_result();
+$row = $result->fetch_assoc();
+$organization_knowledge_intensity = $row['text'];
 
 
 
@@ -48,13 +168,9 @@ require_once('fpdf/extension.php');
 
 $pdf = new PDF('P', 'mm', 'A4');
 
-
-
 $pdf->AddFont('Poppins', '', 'Poppins-Regular.php');
 $pdf->AddFont('Poppins', 'B', 'Poppins-Bold.php');
 $pdf->AddFont('Poppins', 'M', 'Poppins-Medium.php');
-
-
 
 $pdf->AddPage();
 $pdf->SetAutoPageBreak(true,0);
@@ -78,8 +194,8 @@ $pdf->MultiCell(100,6,$text,0);
 
 $x = 10;
 $y = $pdf->GetY();
-$text = "Sector: {$business_sector}";
-insert_MultiCell($pdf, $X = $x, $Y = $y, $width=100 ,$height=6 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
+$text = "Sector: {$sector}";
+insert_MultiCell($pdf, $X = $x, $Y = $y, $width=100 ,$height=3.5 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 $x = 10;
 $y = $pdf->GetY();
@@ -257,22 +373,6 @@ $pdf->SetFont("Poppins", "", "6");
 $text = "                               Embed ethical reviews in AI development processes to ensure fairness and transparency.";
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
-
-
-// $pdf->SetFont("Arial", "", "10");
-// $x = 8;
-// $y = $pdf->GetY()+4;
-// $text = "AI Impact on your organization".$y;
-// insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-// $y = $pdf->GetY()+6;
-// $pdf->SetFont("Arial", "", "7");
-// $text = "Your organization is adeptly navigating the AI landscape, integrating intelligent solutions that enhance efficiency and innovation. AI is a catalyst in our sector, driving personalized customer experiences and streamlined operations. We’ve adopted AI to analyze complex data, yielding insights for strategic decisions. Office work intensity has escalated due to AI. Automation optimizes tasks, allowing focus on value-added activities and innovation. AI’s role is pivotal; we’re evolving with this technology, ensuring alignment with trends and ethical standards. We’re committed to evolving with AI, ensuring our strategies align with emerging trends, prioritizing ethical and transparent AI applications. The continuous learning and adaptation fostered by AI is nurturing a culture of perpetual improvement within our organization, stimulating a forward-thinking mindset among our teams. By closely monitoring the evolving AI landscape and actively engaging in community dialogues around responsible AI, we are not only staying ahead of technological advancements but also fostering a robust ethical foundation that underscores our AI-driven initiatives.";
-// insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
-// $y = $pdf->GetY()+1;
-// $text = "The continuous learning and adaptation fostered by AI is nurturing a culture of perpetual improvement within our organization, stimulating a forward-thinking mindset among our teams. By closely monitoring the evolving AI landscape and actively engaging in community dialogues around responsible AI, we are not only staying ahead of technological advancements but also fostering a robust ethical foundation that underscores our AI-driven initiatives.";
-// insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
-
-
 $pdf->SetFont("Poppins", "B", "10");
 $x = 8;
 $y = $pdf->GetY()+4;
@@ -280,7 +380,13 @@ $text = "AI Impact on your organization";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $y = $pdf->GetY()+6;
 $pdf->SetFont("Poppins", "", "6");
-$text = mb_convert_encoding("Your organization is adeptly navigating the AI landscape, integrating intelligent solutions that enhance efficiency and innovation. AI is a catalyst in our sector, driving personalized customer experiences and streamlined operations. We've adopted AI to analyze complex data, yielding insights for strategic decisions. Office work intensity has escalated due to AI. Automation optimizes tasks, allowing focus on value-added activities and innovation. AI's role is pivotal; we're evolving with this technology, ensuring alignment with trends and ethical standards. We're committed to evolving with AI, ensuring our strategies align with emerging trends, prioritizing ethical and transparent AI applications. The continuous learning and adaptation fostered by AI is nurturing a culture of perpetual improvement within our organization, stimulating a forward-thinking mindset among our teams. By closely monitoring the evolving AI landscape and actively engaging in community dialogues around responsible AI, we are not only staying ahead of technological advancements but also fostering a robust ethical foundation that underscores our AI-driven initiatives.", 'ISO-8859-1', 'UTF-8');
+$text = "";
+$text  = $ai_goals_text;
+$text .= $business_sector;
+$text .= $rate_your_brand;
+$text .= $organization_knowledge_intensity;
+$text .= mb_convert_encoding($text, 'ISO-8859-1', 'UTF-8');
+// $text .= mb_convert_encoding("Your organization is adeptly navigating the AI landscape, integrating intelligent solutions that enhance efficiency and innovation. AI is a catalyst in our sector, driving personalized customer experiences and streamlined operations. We've adopted AI to analyze complex data, yielding insights for strategic decisions. Office work intensity has escalated due to AI. Automation optimizes tasks, allowing focus on value-added activities and innovation. AI's role is pivotal; we're evolving with this technology, ensuring alignment with trends and ethical standards. We're committed to evolving with AI, ensuring our strategies align with emerging trends, prioritizing ethical and transparent AI applications. The continuous learning and adaptation fostered by AI is nurturing a culture of perpetual improvement within our organization, stimulating a forward-thinking mindset among our teams. By closely monitoring the evolving AI landscape and actively engaging in community dialogues around responsible AI, we are not only staying ahead of technological advancements but also fostering a robust ethical foundation that underscores our AI-driven initiatives.", 'ISO-8859-1', 'UTF-8');
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 $y = $pdf->GetY()+1;
 $text = "The continuous learning and adaptation fostered by AI is nurturing a culture of perpetual improvement within our organization, stimulating a forward-thinking mindset among our teams. By closely monitoring the evolving AI landscape and actively engaging in community dialogues around responsible AI, we are not only staying ahead of technological advancements but also fostering a robust ethical foundation that underscores our AI-driven initiatives.";
@@ -305,5 +411,67 @@ www.dynaminds.ai | info@dynaminds.ai ";
 insert_MultiCell($pdf, $X = 160, $Y = $y+7, $width=45 ,$height=2.8 ,$text=$text ,$border=0 ,$alignment='C' ,$fill=false);
 
 
+$filename = 'outputs/output.pdf';
+$pdf->Output("F", $filename);
 
-$pdf->Output("I", 'output.pdf');
+
+
+// Create an instance; Pass `true` to enable exceptions 
+$mail = new PHPMailer;
+
+// Server settings 
+//    $mail->SMTPDebug = SMTP::DEBUG_SERVER;    //Enable verbose debug output
+//    $mail->SMTPDebug = 4; 
+$mail->isSMTP();                            // Set mailer to use SMTP
+$mail->Host = 'smtp.gmail.com';           // Specify main and backup SMTP servers
+$mail->SMTPAuth = true;                     // Enable SMTP authentication
+
+
+// ======= C R E D E N T I A L S ======= 
+$mail->Username = 'tlannister903@gmail.com';  // SMTP sender's username
+$mail->Password = 'iimvajgcrgfdngyd';         // SMTP sender's password
+
+// $receiver_mail = 'tlannister903@gmail.com';   // Receiver's Mail
+
+$mail->setFrom('tlannister903@gmail.com', 'PDF test');
+// =====================================
+
+
+
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+$mail->Port       = 587;
+$mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
+//    $mail->Port = 465;                          // TCP port to connect to
+
+// Sender info 
+//    $mail->addReplyTo('reply@example.com', 'SenderName'); 
+
+// Add a recipient 
+$mail->addAddress($receiver_mail);
+
+//$mail->addCC('cc@example.com'); 
+//$mail->addBCC('bcc@example.com'); 
+
+// Set email format to HTML 
+$mail->isHTML(true);
+
+// Mail subject 
+$mail->Subject = 'Test Mail with Attachment';
+
+// Mail body content 
+$bodyContent = '<h1>Mail with attachment</h1>';
+$bodyContent .= "<p>PDF file below:output.pdf</p>";
+$mail->Body    = $bodyContent;
+
+
+// Add the attachment
+$mail->addAttachment($filename);
+
+// Send email 
+if (!$mail->send()) {
+    echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+    // return false;
+} else {
+    echo 'Message has been sent.'; 
+    // return true;
+}

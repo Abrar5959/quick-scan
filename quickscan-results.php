@@ -420,7 +420,7 @@ else{
 						<h2 class="text-start text-md-center font-body mb-6">Quickscan Results: Your organization's AI Transformation Readiness</h2>
 						</p>
 						<div class="row">
-							<div class="col-6">
+							<div class="col-8">
 								<p>
 									[your quickscan indicates a high score overall. Here, two options of blobs are available, high-score and low-score. these are calculated.]
 								</p>
@@ -432,32 +432,23 @@ else{
 										<p>
 											Some generic text here, inviting the respondent for the free Quickscan Report.
 							</div>
-							<div class="col-6">
+							<div class="col-4">
 								<canvas id="myChart"></canvas>
 								<!-- <img src="images/quickscan-chart-demo.png" alt="Polar Chart"> -->
 							</div>
 						</div>
-
 						<div class="row col-mb-50">
-
 							<div class="col-12">
-
 								<h3>A Complementary Quickscan Report</h3>
 								<p>Dynaminds offers a tailored, complementary Quickscan Report when you complete the questions in the section below. This personalized report, delivered as a one-pager PDF, is constructed based on the input provided by you, ensuring a reflective analysis of your responses.</p>
-
 								<p>The report not only encapsulates your input but also integrates sector-specific information, offering a contextual understanding of your standing within your operational sector in terms of AI. Furthermore, the report highlights quick wins, actionable insights that can be readily implemented to garner immediate benefits.</p>
-
 								<p>By investing a few minutes in answering the questions, you unlock a resource rich with actionable insights tailored to your unique operational context. Take advantage of this opportunity to gain a clearer perspective on your position within your sector and identify quick wins to propel your operations forward.</p>
-
 								<p>
 									We're curious if you found the Quickcan a useful starting point in your AI transformation journey. We'll provide you an option to let us know if you'd like us to reach out and follow up to discuss your Quickscan.
-
 								</p>
 							</div>
-
 						</div>
 						<div class="col-12">
-
 							<div class="card-body">
 								<div class="card bg-light p-3">
 									<div class="row">
@@ -475,19 +466,19 @@ else{
 												<label for="sector">Which sector or industry is your business primarily active in?</label>
 												<select class="form-select" name="sector" id="sector" style="max-width: 300px;" required>
 													<option selected disabled>Pick an option</option>
-													<option value="agricultureNaturalResources">Agriculture and Natural Resources</option>
-													<option value="automotiveTransportation">Automotive and Transportation</option>
-													<option value="bankingFinancialServicesInsurance">Banking, Financial Services, and Insurance</option>
-													<option value="constructionRealEstate">Construction and Real Estate</option>
-													<option value="educationResearch">Education and Research</option>
-													<option value="energyUtilitiesMining">Energy, Utilities, and Mining</option>
-													<option value="healthcarePharmaceuticals">Healthcare and Pharmaceuticals</option>
-													<option value="informationTechnologyTelecommunications">Information Technology and Telecommunications</option>
-													<option value="manufacturingEngineering">Manufacturing and Engineering</option>
-													<option value="mediaEntertainmentHospitality">Media, Entertainment, and Hospitality</option>
-													<option value="retailWholesaleConsumerGoods">Retail, Wholesale, and Consumer Goods</option>
-													<option value="publicSectorNonProfit">Public Sector and Non-Profit</option>
-													<option value="other">Other</option>
+													<option value="Agriculture and Natural Resources">Agriculture and Natural Resources</option>
+													<option value="Automotive and Transportation">Automotive and Transportation</option>
+													<option value="Banking, Financial Services, and Insurance">Banking, Financial Services, and Insurance</option>
+													<option value="Construction and Real Estate">Construction and Real Estate</option>
+													<option value="Education and Research">Education and Research</option>
+													<option value="Energy, Utilities, and Mining">Energy, Utilities, and Mining</option>
+													<option value="Healthcare and Pharmaceuticals">Healthcare and Pharmaceuticals</option>
+													<option value="Information Technology and Telecommunications">Information Technology and Telecommunications</option>
+													<option value="Manufacturing and Engineering">Manufacturing and Engineering</option>
+													<option value="Media, Entertainment, and Hospitality">Media, Entertainment, and Hospitality</option>
+													<option value="Retail, Wholesale, and Consumer Goods">Retail, Wholesale, and Consumer Goods</option>
+													<option value="Public Sector and Non-Profit">Public Sector and Non-Profit</option>
+													<option value="Other">Other</option>
 												</select>
 											</p>
 										</div>
@@ -504,11 +495,11 @@ else{
 												<label for="ai-knowledge-board">How would you rate your board's AI knowledge?</label>
 												<select class="form-select" name="ai_knowledge_board" id="ai-knowledge-board" style="max-width: 300px;" required>
 													<option selected disabled>Pick an option</option>
-													<option value="noKnowledge">Very limited knowledge</option>
-													<option value="basicUnderstanding">Basic understanding</option>
-													<option value="moderateUnderstanding">Moderate understanding</option>
-													<option value="advancedUnderstanding">Advanced understanding</option>
-													<option value="expertKnowledge">Expert knowledge</option>
+													<option value="Very limited knowledge">Very limited knowledge</option>
+													<option value="Basic understanding">Basic understanding</option>
+													<option value="Moderate understanding">Moderate understanding</option>
+													<option value="Advanced understanding">Advanced understanding</option>
+													<option value="Expert knowledge">Expert knowledge</option>
 												</select>
 											</p>
 										</div>
@@ -527,11 +518,11 @@ else{
 												<label for="knowledge_intensity">How would you describe your organization's knowledge intensity?</label>
 												<select class="form-select" name="knowledge_intensity" id="knowledge_intensity" style="max-width: 300px;" required>
 													<option value="" selected disabled>Pick an option</option>
-													<option value="veryLow">Very Low - Primarily manual or task-oriented operations.</option>
-													<option value="low">Low - Limited knowledge work, focused on manual tasks.</option>
-													<option value="moderate">Moderate - Balanced mix of knowledge-intensive and operational tasks.</option>
-													<option value="high">High - Substantial knowledge work balanced with other tasks.</option>
-													<option value="veryHigh">Very High - Predominantly knowledge-based with analytical and decision-making tasks.</option>
+													<option value="Very Low">Very Low - Primarily manual or task-oriented operations.</option>
+													<option value="Low">Low - Limited knowledge work, focused on manual tasks.</option>
+													<option value="Moderate">Moderate - Balanced mix of knowledge-intensive and operational tasks.</option>
+													<option value="High">High - Substantial knowledge work balanced with other tasks.</option>
+													<option value="Very High">Very High - Predominantly knowledge-based with analytical and decision-making tasks.</option>
 												</select>
 											</p>
 										</div>
