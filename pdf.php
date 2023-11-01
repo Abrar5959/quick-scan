@@ -55,7 +55,7 @@ $date            =  date("d-m-Y"); // DD-MM-YYYY format
 
 
 $business_sector                    = $row['business_sector'];
-$sector                    = $row['business_sector'];
+$sector                             = $row['business_sector'];
 $rate_your_brand                    = $row['rate_your_brand'];
 $organization_knowledge_intensity   = $row['organization_knowledge_intensity'];
 
@@ -238,7 +238,7 @@ $x = 18;
 $y = $pdf->GetY()+4;
 $text = "AI Strategy";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/strategy.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/strategy.png',$x-10,$y+0,8,0);
 $pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
@@ -412,66 +412,66 @@ insert_MultiCell($pdf, $X = 160, $Y = $y+7, $width=45 ,$height=2.8 ,$text=$text 
 
 
 $filename = 'outputs/output.pdf';
-$pdf->Output("F", $filename);
+$pdf->Output("I", $filename);
 
 
 
-// Create an instance; Pass `true` to enable exceptions 
-$mail = new PHPMailer;
+// // Create an instance; Pass `true` to enable exceptions 
+// $mail = new PHPMailer;
 
-// Server settings 
-//    $mail->SMTPDebug = SMTP::DEBUG_SERVER;    //Enable verbose debug output
-//    $mail->SMTPDebug = 4; 
-$mail->isSMTP();                            // Set mailer to use SMTP
-$mail->Host = 'smtp.gmail.com';           // Specify main and backup SMTP servers
-$mail->SMTPAuth = true;                     // Enable SMTP authentication
-
-
-// ======= C R E D E N T I A L S ======= 
-$mail->Username = 'tlannister903@gmail.com';  // SMTP sender's username
-$mail->Password = 'iimvajgcrgfdngyd';         // SMTP sender's password
-
-// $receiver_mail = 'tlannister903@gmail.com';   // Receiver's Mail
-
-$mail->setFrom('tlannister903@gmail.com', 'PDF test');
-// =====================================
+// // Server settings 
+// //    $mail->SMTPDebug = SMTP::DEBUG_SERVER;    //Enable verbose debug output
+// //    $mail->SMTPDebug = 4; 
+// $mail->isSMTP();                            // Set mailer to use SMTP
+// $mail->Host = 'smtp.gmail.com';           // Specify main and backup SMTP servers
+// $mail->SMTPAuth = true;                     // Enable SMTP authentication
 
 
+// // ======= C R E D E N T I A L S ======= 
+// $mail->Username = 'sender@gmail.com';  // SMTP sender's username
+// $mail->Password = 'password';         // SMTP sender's password
 
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-$mail->Port       = 587;
-$mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
-//    $mail->Port = 465;                          // TCP port to connect to
+// // $receiver_mail = 'sender@gmail.com';   // Receiver's Mail
 
-// Sender info 
-//    $mail->addReplyTo('reply@example.com', 'SenderName'); 
-
-// Add a recipient 
-$mail->addAddress($receiver_mail);
-
-//$mail->addCC('cc@example.com'); 
-//$mail->addBCC('bcc@example.com'); 
-
-// Set email format to HTML 
-$mail->isHTML(true);
-
-// Mail subject 
-$mail->Subject = 'Test Mail with Attachment';
-
-// Mail body content 
-$bodyContent = '<h1>Mail with attachment</h1>';
-$bodyContent .= "<p>PDF file below:output.pdf</p>";
-$mail->Body    = $bodyContent;
+// $mail->setFrom('sender@gmail.com', 'PDF test');
+// // =====================================
 
 
-// Add the attachment
-$mail->addAttachment($filename);
 
-// Send email 
-if (!$mail->send()) {
-    echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
-    // return false;
-} else {
-    echo 'Message has been sent.'; 
-    // return true;
-}
+// $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+// $mail->Port       = 587;
+// $mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
+// //    $mail->Port = 465;                          // TCP port to connect to
+
+// // Sender info 
+// //    $mail->addReplyTo('reply@example.com', 'SenderName'); 
+
+// // Add a recipient 
+// $mail->addAddress($receiver_mail);
+
+// //$mail->addCC('cc@example.com'); 
+// //$mail->addBCC('bcc@example.com'); 
+
+// // Set email format to HTML 
+// $mail->isHTML(true);
+
+// // Mail subject 
+// $mail->Subject = 'Test Mail with Attachment';
+
+// // Mail body content 
+// $bodyContent = '<h1>Mail with attachment</h1>';
+// $bodyContent .= "<p>PDF file below:output.pdf</p>";
+// $mail->Body    = $bodyContent;
+
+
+// // Add the attachment
+// $mail->addAttachment($filename);
+
+// // Send email 
+// if (!$mail->send()) {
+//     echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+//     // return false;
+// } else {
+//     echo 'Message has been sent.'; 
+//     // return true;
+// }

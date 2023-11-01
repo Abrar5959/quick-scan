@@ -408,8 +408,8 @@ else{
 	</header><!-- #header end -->
 	<!-- Content ============================================= -->
 	<form action="" method="post">
-			<input type="hidden" id="" value="<?=$_SESSION['weightSum'][0];?>,<?=$_SESSION['weightSum'][1];?>,<?=$_SESSION['weightSum'][2];?>,<?=$_SESSION['weightSum'][3];?>,<?=$_SESSION['weightSum'][4];?>,<?=$_SESSION['weightSum'][5];?>,<?=$_SESSION['weightSum'][6];?>">
-			<input type="hidden" id="data-input" value="12,49,18,25,33,29,45">
+			<input type="hidden" id="data-input" value="<?=$_SESSION['quesVal_mul_weight'][0]/$_SESSION['weightSum'][0];?>,<?=$_SESSION['quesVal_mul_weight'][1]/$_SESSION['weightSum'][1];?>,<?=$_SESSION['quesVal_mul_weight'][2]/$_SESSION['weightSum'][2];?>,<?=$_SESSION['quesVal_mul_weight'][3]/$_SESSION['weightSum'][3];?>,<?=$_SESSION['quesVal_mul_weight'][4]/$_SESSION['weightSum'][4];?>,<?=$_SESSION['quesVal_mul_weight'][5]/$_SESSION['weightSum'][5];?>,<?=$_SESSION['quesVal_mul_weight'][6]/$_SESSION['weightSum'][6];?>">
+			<!-- <input type="hidden" id="data-input" value="12,49,18,25,33,29,45"> -->
 		<section id="content">
 			<div class="content-wrap">
 				<div class="clear mb-5"></div>
@@ -1016,10 +1016,10 @@ else{
 		responsive: true,
 		scales: {
 		r: {
-			max: 50,
+			max: 5,
 			ticks: {
 			display: false,
-			stepSize: 10  // This will show grid lines at intervals of 10
+			stepSize: 1  // This will show grid lines at intervals of 10
 			},
 			pointLabels: {
 			display: true,
