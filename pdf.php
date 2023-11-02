@@ -204,7 +204,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y, $width=100 ,$height=6 ,$text=$text ,$bo
 
 $x = 10;
 $y = $pdf->GetY();
-$text = "This quickscan holistic snapshot of your organization's readiness to integrate AI. The quickscan evaluates 7 aspects of your organization and is based on your responses, combined with the expertise of Dynaminds and current sector-specific trends.";
+$text = "This quickscan offers a holistic snapshot of your organization's readiness to integrate AI. The quickscan evaluates 7 aspects of your organization and is based on your responses, combined with the expertise of Dynaminds and your current sector-specific trends.";
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.7 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
@@ -215,7 +215,7 @@ $x = 18;
 $y = 65;
 $text = "AI Trends";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/telescope.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/aitrends-icon.png',$x-10,$y+2,8,0);
 $pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
@@ -228,7 +228,7 @@ $pdf->SetFont("Poppins", "B", "6");
 $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Poppins", "", "6");
-$text = "                                 Invest in ongoing AI education to equip your team with the skills needed to maximize AI's potential.";
+$text = "                                Invest in ongoing AI education to equip your team with the skills needed to maximize AI's potential.";
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 // ===============================
@@ -238,7 +238,7 @@ $x = 18;
 $y = $pdf->GetY()+4;
 $text = "AI Strategy";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/strategy.png',$x-10,$y+0,8,0);
+$pdf->Image('icons/strategy-icon.png',$x-10,$y+0,8,0);
 $pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
@@ -251,7 +251,7 @@ $pdf->SetFont("Poppins", "B", "6");
 $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Poppins", "", "6");
-$text = "                                 Prioritize a data-centric culture to bolster AI initiatives.";
+$text = "                                Prioritize a data-centric culture to bolster AI initiatives.";
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.3, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 // ===============================
@@ -261,7 +261,7 @@ $x = 18;
 $y = $pdf->GetY()+4;
 $text = "Organization";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/gears.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/organization-icon.png',$x-10,$y+2,8,0);
 $pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
@@ -285,7 +285,7 @@ $x = 18;
 $y = $pdf->GetY()+4;
 $text = "People";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/profile-female.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/people-icon.png',$x-10,$y+2,8,0);
 $pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
@@ -309,7 +309,7 @@ $x = 18;
 $y = $pdf->GetY()+4;
 $text = "Data";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/layers.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/data-icon.png',$x-10,$y+2,8,0);
 $pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
@@ -322,7 +322,7 @@ $pdf->SetFont("Poppins", "B", "6");
 $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Poppins", "", "6");
-$text = "                               Adopt a comprehensive data governance framework to enhance quality and security within your organization.";
+$text = "                                Adopt a comprehensive data governance framework to enhance quality and security within your organization.";
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
@@ -333,7 +333,7 @@ $x = 18;
 $y = $pdf->GetY()+4;
 $text = "Controls";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/speedometer.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/controls-icon.png',$x-10,$y+2,8,0);
 $pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
@@ -346,7 +346,7 @@ $pdf->SetFont("Poppins", "B", "6");
 $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Poppins", "", "6");
-$text = "                               Regularly update and test control mechanisms to ensure their effectiveness and adaptability.";
+$text = "                                Regularly update and test control mechanisms to ensure their effectiveness and adaptability.";
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
@@ -357,7 +357,7 @@ $x = 18;
 $y = $pdf->GetY()+4;
 $text = "Responsible AI";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/heart.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/responsibleai-icon.png',$x-10,$y+2,8,0);
 $pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
@@ -394,12 +394,12 @@ insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$
 
 $pdf->SetFont("Poppins", "B", "7");
 $y = $pdf->GetY()+2;
-$text = "Get grip and direction on your AI transformation journey.";
+$text = "Give direction to your AI transformation journey.";
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 $pdf->SetFont("Poppins", "", "5");
 $y = $pdf->GetY()+2;
-$text = " Explanation of the levels used: Level 1 - Initial: Minimal engagement with AI, characterized by a lack of awareness or understanding. Level 2 - Aware: Basic awareness of AI exists, but no structured initiatives are in place. Level 3 - Operational: AI initiatives are operational with a defined strategy, delivering initial value. Level 4 - Integrated: AI is well-integrated across functions, with growing expertise and value realization. Level 5 - Optimized: AI is optimized, driving innovation, and is a core part of organizational strategy, delivering significant value.";
+$text = "Explanation of the maturity levels used in the graph above: Level 1 - Initial: Minimal engagement with AI, characterized by a lack of awareness or understanding. Level 2 - Aware: Basic awareness of AI exists, but no structured initiatives are in place. Level 3 - Operational: AI initiatives are operational with a defined strategy, delivering initial value. Level 4 - Integrated: AI is well-integrated across functions, with growing expertise and value realization. Level 5 - Optimized: AI within your organization is optimized, driving innovation, and is a core part of organizational strategy, delivering significant value.";
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=150 ,$height=2.8 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
