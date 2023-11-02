@@ -4,6 +4,19 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require_once('db.php');
+
+
+function get_blob($conn,$main_heading,$sub_heading){
+	$query = "SELECT * FROM textblobs WHERE `main_heading` = ? AND `sub_heading`= ? ";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("ss", $main_heading,$sub_heading);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$row = $result->fetch_assoc();
+
+	return $row['text'];
+}
+
 if (isset($_POST['generate-quickscan-submit'])) {
 	if (isset($_SESSION['pillarArray'])) {
 
@@ -11,7 +24,7 @@ if (isset($_POST['generate-quickscan-submit'])) {
 		$phone = isset($_POST['phone']) ? $_POST['phone'] : '';
 		$business_sector = $_POST["sector"];
 		$companyName = $_POST["companyName"];
-		$rate_your_brand = $_POST["ai_knowledge_board"];
+		$ai_knowledge_board = $_POST["ai_knowledge_board"];
 		$knowledge_intensity = $_POST["knowledge_intensity"];
 		$contactPermission = isset($_POST["contactPermission"]) ? 1 : 0; // Store 1 if checked, 0 if not checked
 
@@ -66,7 +79,7 @@ if (isset($_POST['generate-quickscan-submit'])) {
 					companyName = ?, 
 					ph = ?, 
 					business_sector = ?, 
-					rate_your_brand = ?, 
+					ai_knowledge_board = ?, 
 					organization_knowledge_intensity = ?, 
 					strategic_advancement = ?, 
 					operational_efficiency = ?, 
@@ -75,12 +88,12 @@ if (isset($_POST['generate-quickscan-submit'])) {
         			WHERE id = ?";
 
 		$stmt = $conn->prepare($sql);
-		$stmt->bind_param("ssssssssssi", $email, $companyName, $phone, $business_sector, $rate_your_brand, $knowledge_intensity, $strategicAdvancementSerialized, $operationalEfficiencySerialized, $productServiceInnovationSerialized, $otherSerialized, $_SESSION['id']);
+		$stmt->bind_param("ssssssssssi", $email, $companyName, $phone, $business_sector, $ai_knowledge_board, $knowledge_intensity, $strategicAdvancementSerialized, $operationalEfficiencySerialized, $productServiceInnovationSerialized, $otherSerialized, $_SESSION['id']);
 
 		if ($stmt->execute()) {
 			unset($_SESSION['pillarArray']);
 			$stmt->close();
-			$conn->close();
+			// $conn->close();
 			// unset($_SESSION['id']);
 
 			// Update was successful.
@@ -89,7 +102,7 @@ if (isset($_POST['generate-quickscan-submit'])) {
 		} else {
 			echo "Error: " . $stmt->error;
 			$stmt->close();
-			$conn->close();
+			// $conn->close();
 		}
 	} else {
 		echo "<script>window.location.href='quickscan.php';</script>";
@@ -300,8 +313,57 @@ if (isset($_POST['step1']) OR isset($_SESSION['pillarArray'])) {
 		} else {
 			echo "Error: " . $stmt->error;
 		}
-		$conn->close();
+		// $conn->close();
 	}
+	$graph_val_0 = ($_SESSION['quesVal_mul_weight'][0]/$_SESSION['weightSum'][0])*10;
+	$graph_val_1 = ($_SESSION['quesVal_mul_weight'][1]/$_SESSION['weightSum'][1])*10;
+	$graph_val_2 = ($_SESSION['quesVal_mul_weight'][2]/$_SESSION['weightSum'][2])*10;
+	$graph_val_3 = ($_SESSION['quesVal_mul_weight'][3]/$_SESSION['weightSum'][3])*10;
+	$graph_val_4 = ($_SESSION['quesVal_mul_weight'][4]/$_SESSION['weightSum'][4])*10;
+	$graph_val_5 = ($_SESSION['quesVal_mul_weight'][5]/$_SESSION['weightSum'][5])*10;
+	$graph_val_6 = ($_SESSION['quesVal_mul_weight'][6]/$_SESSION['weightSum'][6])*10;
+
+	$AITrends 		= $graph_val_0;
+	$AIStrategy 	= $graph_val_1;
+	$Organization 	= $graph_val_2;
+	$People	 		= $graph_val_3;
+	$Data 			= $graph_val_4;
+	$Controls 		= $graph_val_5;
+	$ResponsibleAI 	= $graph_val_6;
+
+	$average_of_all = ($graph_val_0 + $graph_val_1 + $graph_val_2 + $graph_val_3 + $graph_val_4 + $graph_val_5 + $graph_val_6)/7;
+
+	$lowscore_blobs  = array();
+	$highscore_blobs = array();
+
+	$sub_heading = $AITrends<35 ? "lowscore_result" : "highscore_result";
+	$AITrends_blob = get_blob($conn,"AITrends",$sub_heading);
+	$AITrends<35 ? array_push($lowscore_blobs,$AITrends_blob) : array_push($highscore_blobs,$AITrends_blob);
+
+	$sub_heading = $AIStrategy<35 ? "lowscore_result" : "highscore_result";
+	$AIStrategy_blob = get_blob($conn,"AI Strategy",$sub_heading);
+	$AIStrategy<35 ? array_push($lowscore_blobs,$AIStrategy_blob) : array_push($highscore_blobs,$AIStrategy_blob);
+
+	$sub_heading = $Organization<35 ? "lowscore_result" : "highscore_result";
+	$Organization_blob = get_blob($conn,"Organization",$sub_heading);
+	$Organization<35 ? array_push($lowscore_blobs,$Organization_blob) : array_push($highscore_blobs,$Organization_blob);
+
+	$sub_heading = $People<35 ? "lowscore_result" : "highscore_result";
+	$People_blob = get_blob($conn,"People",$sub_heading);
+	$People<35 ? array_push($lowscore_blobs,$People_blob) : array_push($highscore_blobs,$People_blob);
+
+	$sub_heading = $Data<35 ? "lowscore_result" : "highscore_result";
+	$Data_blob = get_blob($conn,"Data",$sub_heading);
+	$Data<35 ? array_push($lowscore_blobs,$Data_blob) : array_push($highscore_blobs,$Data_blob);
+
+	$sub_heading = $Controls<35 ? "lowscore_result" : "highscore_result";
+	$Controls_blob = get_blob($conn,"Controls",$sub_heading);
+	$Controls<35 ? array_push($lowscore_blobs,$Controls_blob) : array_push($highscore_blobs,$Controls_blob);
+
+	$sub_heading = $ResponsibleAI<35 ? "lowscore_result" : "highscore_result";
+	$ResponsibleAI_blob = get_blob($conn,"Responsible AI",$sub_heading);
+	$ResponsibleAI<35 ? array_push($lowscore_blobs,$ResponsibleAI_blob) : array_push($highscore_blobs,$ResponsibleAI_blob);
+
 }
 else{
 	echo "<script>window.location.href='quickscan.php';</script>";
@@ -409,13 +471,13 @@ else{
 	<!-- Content ============================================= -->
 	<form action="" method="post">
 			<input type="hidden" id="data-input" value="
-			<?=($_SESSION['quesVal_mul_weight'][0]/$_SESSION['weightSum'][0])*10;?>,
-			<?=($_SESSION['quesVal_mul_weight'][1]/$_SESSION['weightSum'][1])*10;?>,
-			<?=($_SESSION['quesVal_mul_weight'][2]/$_SESSION['weightSum'][2])*10;?>,
-			<?=($_SESSION['quesVal_mul_weight'][3]/$_SESSION['weightSum'][3])*10;?>,
-			<?=($_SESSION['quesVal_mul_weight'][4]/$_SESSION['weightSum'][4])*10;?>,
-			<?=($_SESSION['quesVal_mul_weight'][5]/$_SESSION['weightSum'][5])*10;?>,
-			<?=($_SESSION['quesVal_mul_weight'][6]/$_SESSION['weightSum'][6])*10;?>">
+			<?=$graph_val_0?>,
+			<?=$graph_val_0;?>,
+			<?=$graph_val_0;?>,
+			<?=$graph_val_0;?>,
+			<?=$graph_val_0;?>,
+			<?=$graph_val_0;?>,
+			<?=$graph_val_0;?>">
 			<!-- <input type="hidden" id="data-input" value="12,49,18,25,33,29,45"> -->
 		<section id="content">
 			<div class="content-wrap">
@@ -428,11 +490,45 @@ else{
 						</p>
 						<div class="row">
 							<div class="col-8">
-								<p>
-									[your quickscan indicates a high score overall. Here, two options of blobs are available, high-score and low-score. these are calculated.]
-								</p>
-								<p>
-									[it would be nice to point out 2 elements which score well, =>3] and [not very well, "<3" on average in that segment] </p>
+								<?php
+									if($average_of_all<35)
+									{
+										$score_blob = "
+										<h4>Lowscore overall</h4>
+										<p>On average, your scores indicate there is room for improvement. Below, we will provide some areas to focus on.</p>
+										";
+										echo $score_blob;
+										foreach ($lowscore_blobs as $blob) {
+											echo "<p>- {$blob}</p>";
+										}
+										if(!empty($highscore_blobs))
+										{
+											echo "<p><strong>Some scores can be considered sufficient in terms of maturity:</strong></p>";
+											foreach ($highscore_blobs as $blob) {
+												echo "<p>- {$blob}</p>";
+											}
+										}
+									}
+									else if($average_of_all>35)
+									{
+										$score_blob = "
+										<h4>Highscore overall</h4>
+										<p>On average, your scores can be considered sufficient in terms of maturity. Below, we will provide some highlights and some areas you can consider to improve.</p>
+										";
+										echo $score_blob;
+										foreach ($highscore_blobs as $blob) {
+											echo "<p>- {$blob}</p>";
+										}
+										if(!empty($lowscore_blobs))
+										{
+											echo "<p><strong>Some segments scored lower, indicating room for improvement:</strong></p>";
+											foreach ($lowscore_blobs as $blob) {
+												echo "<p>- {$blob}</p>";
+											}
+										}
+									}
+									
+								?>
 										<p>
 											Some generic quick wins given here.
 										</p>
@@ -1026,7 +1122,7 @@ else{
 			max: 50,
 			ticks: {
 			display: false,
-			stepSize: 1  // This will show grid lines at intervals of 10
+			stepSize: 10  // This will show grid lines at intervals of 10
 			},
 			pointLabels: {
 			display: true,

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 01, 2023 at 02:33 AM
+-- Generation Time: Nov 02, 2023 at 02:49 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -144,20 +144,13 @@ CREATE TABLE `surveydata` (
   `companyName` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `ph` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `business_sector` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `rate_your_brand` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ai_knowledge_board` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `organization_knowledge_intensity` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `strategic_advancement` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `operational_efficiency` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `quality_enhancement` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `other` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `surveydata`
---
-
-INSERT INTO `surveydata` (`id`, `pillars`, `email`, `companyName`, `ph`, `business_sector`, `rate_your_brand`, `organization_knowledge_intensity`, `strategic_advancement`, `operational_efficiency`, `quality_enhancement`, `other`) VALUES
-(1, 'a:7:{s:7:\"Pillar1\";a:5:{i:0;s:1:\"1\";i:1;s:1:\"1\";i:2;s:1:\"1\";i:3;s:1:\"2\";i:4;s:1:\"1\";}s:7:\"Pillar2\";a:5:{i:0;s:1:\"1\";i:1;s:1:\"1\";i:2;s:1:\"1\";i:3;s:1:\"1\";i:4;s:1:\"1\";}s:7:\"Pillar3\";a:4:{i:0;s:1:\"1\";i:1;s:1:\"1\";i:2;s:1:\"1\";i:3;s:1:\"1\";}s:7:\"Pillar4\";a:5:{i:0;s:1:\"1\";i:1;s:1:\"1\";i:2;s:1:\"1\";i:3;s:1:\"1\";i:4;s:1:\"1\";}s:7:\"Pillar5\";a:4:{i:0;s:1:\"1\";i:1;s:1:\"1\";i:2;s:1:\"1\";i:3;s:1:\"1\";}s:7:\"Pillar6\";a:3:{i:0;s:1:\"1\";i:1;s:1:\"1\";i:2;s:1:\"1\";}s:7:\"Pillar7\";a:4:{i:0;s:1:\"1\";i:1;s:1:\"1\";i:2;s:1:\"1\";i:3;s:1:\"1\";}}', 'mursaleen5959@gmail.com', 'Jyler co', '111-111-1111', 'Automotive and Transportation', 'Basic understanding', 'Low', 'a:6:{s:22:\"Driving Revenue Growth\";i:1;s:31:\"Enhancing Competitive Advantage\";i:0;s:22:\"Expanding Market Reach\";i:0;s:27:\"Accelerating Time-to-Market\";i:0;s:25:\"Improving Decision-Making\";i:0;s:37:\"Enhancing Data Analytics and Insights\";i:1;}', 'a:5:{s:38:\"Increasing Efficiency and Productivity\";i:1;s:14:\"Cost Reduction\";i:0;s:24:\"Automating Routine Tasks\";i:0;s:33:\"Improving Supply Chain Management\";i:0;s:38:\"Improving Accuracy and Reducing Errors\";i:0;}', 'a:3:{s:34:\"Boosting Innovation and Creativity\";i:0;s:36:\"Enhancing Product or Service Quality\";i:0;s:29:\"Enhancing Customer Experience\";i:0;}', 'a:4:{s:46:\"Enhancing Employee Engagement and Satisfaction\";i:0;s:30:\"Compliance and Risk Management\";i:0;s:38:\"Enhancing Security and Fraud Detection\";i:0;s:49:\"Improving Sustainability and Environmental Impact\";i:0;}');
 
 -- --------------------------------------------------------
 
@@ -213,7 +206,21 @@ INSERT INTO `textblobs` (`id`, `main_heading`, `sub_heading`, `text`) VALUES
 (35, 'ai_knowledge_board', 'Basic understanding', 'As your response indicates, a basic understanding can initiate AI discussions, yet advancing knowledge is essential to effectively govern AI initiatives and foster a conducive AI culture.'),
 (36, 'ai_knowledge_board', 'Moderate understanding', 'As your response indicates, this level of understanding is a positive step, yet continuous education can better align board decisions with AI transformation goals across all pillars.'),
 (37, 'ai_knowledge_board', 'Advanced understanding', 'As your response indicates, advanced understanding at the Board level will significantly bolster the AI Strategy and Leadership Support pillars, promoting a well-guided AI transformation journey.'),
-(38, 'ai_knowledge_board', 'Expert knowledge', 'As your response indicates, expert knowledge facilitates insightful governance, propelling all seven pillars, especially in strategizing, ensuring responsible AI practices, and cultivating a competitive edge in AI trends.');
+(38, 'ai_knowledge_board', 'Expert knowledge', 'As your response indicates, expert knowledge facilitates insightful governance, propelling all seven pillars, especially in strategizing, ensuring responsible AI practices, and cultivating a competitive edge in AI trends.'),
+(39, 'AITrends', 'lowscore_result', 'It\'s vital to improve your awareness and adaptation to AI trends. Regularly assess emerging tools, and keep a close watch on how AI is shaping your industry and competitors\' actions to avoid being left behind.'),
+(40, 'AITrends', 'highscore_result', 'You\'re adeptly navigating the ever-evolving AI landscape, staying ahead of market shifts and competitor movements. Continue to capitalize on this momentum by persistently monitoring and adapting to new AI tooling developments and market trends to maintain your competitive edge.'),
+(41, 'AI Strategy', 'lowscore_result', 'A low score indicates that your AI strategy may not be fully aligned with your business objectives. It\'s crucial to define your intent and objectives clearly, ensuring your AI initiatives are strategically aligned with the broader goals of the organization.'),
+(42, 'AI Strategy', 'highscore_result', 'Your AI strategy is a key driver of success. Continue ensuring it\'s tightly integrated with your business goals and digital transformation initiatives to maximize AI\'s potential.'),
+(43, 'Organization', 'lowscore_result', 'Focus on strengthening your organizational structure, processes, and technical backbone to better support AI transformations.'),
+(44, 'Organization', 'highscore_result', 'Your organization\'s readiness and adaptability to AI-driven changes are commendable. Keep reinforcing this by continuously assessing and evolving your operational processes, change management capabilities, and technical infrastructure.'),
+(45, 'People', 'lowscore_result', 'To enhance your score, focus on fostering an AI-friendly culture and invest in upskilling your workforce. Leadership support is pivotal; ensure leaders are champions for AI, driving the transformation forward.'),
+(46, 'People', 'highscore_result', 'Your organization\'s culture and leadership are well-aligned with AI initiatives. Maintain this by continuing to cultivate a forward-thinking mindset and upskilling programs for your team.'),
+(47, 'Data', 'lowscore_result', 'A low score suggests you need to enhance your data management and strategy. Concentrate on improving data quality, governance, and infrastructure to fully harness AI\'s capabilities.'),
+(48, 'Data', 'highscore_result', 'Your solid data strategy is a core strength. Keep prioritizing data quality, efficient management, and robust security to support the complex demands of AI solutions.'),
+(49, 'Controls', 'lowscore_result', 'Improving control over your AI initiatives is essential. Develop rigorous validation, ROI assessment, and risk management processes to ensure your AI tools remain efficient and aligned with organizational standards.'),
+(50, 'Controls', 'highscore_result', 'You\'ve established strong controls and oversight for your AI projects. Keep refining these processes to maintain high-quality standards and responsible AI implementation.'),
+(51, 'Responsible AI', 'lowscore_result', 'Increasing your focus on responsible AI is crucial. Work towards embedding ethics, transparency, and regulatory compliance in all AI-related activities.'),
+(52, 'Responsible AI', 'highscore_result', 'Your commitment to ethical AI practices is exemplary. Continue to build on this by staying ahead of regulatory shifts and fostering a culture of transparency and accountability.');
 
 --
 -- Indexes for dumped tables
@@ -275,13 +282,13 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT for table `surveydata`
 --
 ALTER TABLE `surveydata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `textblobs`
 --
 ALTER TABLE `textblobs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
