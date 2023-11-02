@@ -411,67 +411,78 @@ www.dynaminds.ai | info@dynaminds.ai ";
 insert_MultiCell($pdf, $X = 160, $Y = $y+7, $width=45 ,$height=2.8 ,$text=$text ,$border=0 ,$alignment='C' ,$fill=false);
 
 
-$filename = 'outputs/output.pdf';
-$pdf->Output("I", $filename);
+$filename = 'outputs/Dynaminds_AI_Quickcan.pdf';
+$pdf->Output("F", $filename);
 
 
 
-// // Create an instance; Pass `true` to enable exceptions 
-// $mail = new PHPMailer;
+// Create an instance; Pass `true` to enable exceptions 
+$mail = new PHPMailer;
 
-// // Server settings 
-// //    $mail->SMTPDebug = SMTP::DEBUG_SERVER;    //Enable verbose debug output
-// //    $mail->SMTPDebug = 4; 
-// $mail->isSMTP();                            // Set mailer to use SMTP
-// $mail->Host = 'smtp.gmail.com';           // Specify main and backup SMTP servers
-// $mail->SMTPAuth = true;                     // Enable SMTP authentication
-
-
-// // ======= C R E D E N T I A L S ======= 
-// $mail->Username = 'sender@gmail.com';  // SMTP sender's username
-// $mail->Password = 'password';         // SMTP sender's password
-
-// // $receiver_mail = 'sender@gmail.com';   // Receiver's Mail
-
-// $mail->setFrom('sender@gmail.com', 'PDF test');
-// // =====================================
+// Server settings 
+//    $mail->SMTPDebug = SMTP::DEBUG_SERVER;    //Enable verbose debug output
+//    $mail->SMTPDebug = 4; 
+$mail->isSMTP();                            // Set mailer to use SMTP
+$mail->Host = 'smtp.gmail.com';           // Specify main and backup SMTP servers
+$mail->SMTPAuth = true;                     // Enable SMTP authentication
 
 
+// ======= C R E D E N T I A L S ======= 
+$mail->Username = 'sender@gmail.com';  // SMTP sender's username
+$mail->Password = 'password';         // SMTP sender's password
 
-// $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-// $mail->Port       = 587;
-// $mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
-// //    $mail->Port = 465;                          // TCP port to connect to
+// $receiver_mail = 'sender@gmail.com';   // Receiver's Mail
 
-// // Sender info 
-// //    $mail->addReplyTo('reply@example.com', 'SenderName'); 
-
-// // Add a recipient 
-// $mail->addAddress($receiver_mail);
-
-// //$mail->addCC('cc@example.com'); 
-// //$mail->addBCC('bcc@example.com'); 
-
-// // Set email format to HTML 
-// $mail->isHTML(true);
-
-// // Mail subject 
-// $mail->Subject = 'Test Mail with Attachment';
-
-// // Mail body content 
-// $bodyContent = '<h1>Mail with attachment</h1>';
-// $bodyContent .= "<p>PDF file below:output.pdf</p>";
-// $mail->Body    = $bodyContent;
+$mail->setFrom('sender@gmail.com', 'PDF test');
+// =====================================
 
 
-// // Add the attachment
-// $mail->addAttachment($filename);
 
-// // Send email 
-// if (!$mail->send()) {
-//     echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
-//     // return false;
-// } else {
-//     echo 'Message has been sent.'; 
-//     // return true;
-// }
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+$mail->Port       = 587;
+$mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
+//    $mail->Port = 465;                          // TCP port to connect to
+
+// Sender info 
+//    $mail->addReplyTo('reply@example.com', 'SenderName'); 
+
+// Add a recipient 
+$mail->addAddress($receiver_mail);
+
+//$mail->addCC('cc@example.com'); 
+//$mail->addBCC('bcc@example.com'); 
+
+// Set email format to HTML 
+$mail->isHTML(true);
+
+// Mail subject 
+$mail->Subject = 'Test Mail with Attachment';
+
+// Mail body content 
+$bodyContent = '<p>Dear Reader,</p><br>';
+$bodyContent .= "<p>I hope this message finds you well. Herewith, you’ll receive the AI Quickscan results based on the input you provided us. The Quickscan is a one-pager that outlines key insights and potential opportunities tailored for you.</p>";
+$bodyContent .= "<p><strong>Attachment:</strong> Dynaminds_AI_Quickcan.pdf</p>";
+$bodyContent .= "<p>This one-pager is designed to give you a concise yet comprehensive view of the current AI landscape as it applies to your specific context.</p>";
+$bodyContent .= "<p>We believe that the AI Quickscan will provide you with valuable insights and a clear direction on how to proceed with AI initiatives in your organization. It is formatted for easy sharing, should you wish to discuss the contents with your team.</p>";
+$bodyContent .= "<p>Should you have any questions, or if you would like to schedule a follow-up discussion to delve deeper into any aspect of the report, do not hesitate to contact us. If you indicated you would like us to contact you to discuss the results, we will do so in the following 3 workdays. </p>";
+$bodyContent .= "<p>We are here to assist you in unlocking the full potential of AI for your business.</p>";
+$bodyContent .= "<p>Thank you for engaging with our services. We look forward to supporting you on your AI journey.</p><br>";
+
+$bodyContent .= "<p>Warm regards,</p>";
+$bodyContent .= "<p>Rob Braun</p>";
+$bodyContent .= "<p>CEO Dynaminds</p>";
+
+$mail->Body    = $bodyContent;
+
+
+// Add the attachment
+$mail->addAttachment($filename);
+
+// Send email 
+if (!$mail->send()) {
+    echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+    // return false;
+} else {
+    echo 'Message has been sent.'; 
+    // return true;
+}
