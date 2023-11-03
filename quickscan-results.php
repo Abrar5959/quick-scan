@@ -315,54 +315,71 @@ function get_blob($conn,$main_heading,$sub_heading){
 			}
 			// $conn->close();
 		}
-$graph_val_0 = ($_SESSION['quesVal_mul_weight'][0]/$_SESSION['weightSum'][0])*10;
-	$graph_val_1 = ($_SESSION['quesVal_mul_weight'][1]/$_SESSION['weightSum'][1])*10;
-	$graph_val_2 = ($_SESSION['quesVal_mul_weight'][2]/$_SESSION['weightSum'][2])*10;
-	$graph_val_3 = ($_SESSION['quesVal_mul_weight'][3]/$_SESSION['weightSum'][3])*10;
-	$graph_val_4 = ($_SESSION['quesVal_mul_weight'][4]/$_SESSION['weightSum'][4])*10;
-	$graph_val_5 = ($_SESSION['quesVal_mul_weight'][5]/$_SESSION['weightSum'][5])*10;
-	$graph_val_6 = ($_SESSION['quesVal_mul_weight'][6]/$_SESSION['weightSum'][6])*10;
 
-	$AITrends 		= $graph_val_0;
-	$AIStrategy 	= $graph_val_1;
-	$Organization 	= $graph_val_2;
-	$People	 		= $graph_val_3;
-	$Data 			= $graph_val_4;
-	$Controls 		= $graph_val_5;
-	$ResponsibleAI 	= $graph_val_6;
+		$weighted_sum = array();
 
-	$average_of_all = ($graph_val_0 + $graph_val_1 + $graph_val_2 + $graph_val_3 + $graph_val_4 + $graph_val_5 + $graph_val_6)/7;
+		array_push($weighted_sum,$_SESSION['quesVal_mul_weight'][0]/$_SESSION['weightSum'][0]);
+		array_push($weighted_sum,$_SESSION['quesVal_mul_weight'][1]/$_SESSION['weightSum'][1]);
+		array_push($weighted_sum,$_SESSION['quesVal_mul_weight'][2]/$_SESSION['weightSum'][2]);
+		array_push($weighted_sum,$_SESSION['quesVal_mul_weight'][3]/$_SESSION['weightSum'][3]);
+		array_push($weighted_sum,$_SESSION['quesVal_mul_weight'][4]/$_SESSION['weightSum'][4]);
+		array_push($weighted_sum,$_SESSION['quesVal_mul_weight'][5]/$_SESSION['weightSum'][5]);
+		array_push($weighted_sum,$_SESSION['quesVal_mul_weight'][6]/$_SESSION['weightSum'][6]);
 
-	$lowscore_blobs  = array();
-	$highscore_blobs = array();
+		$_SESSION['weighted_sum'] = $weighted_sum;
 
-	$sub_heading = $AITrends<35 ? "lowscore_result" : "highscore_result";
-	$AITrends_blob = get_blob($conn,"AITrends",$sub_heading);
-	$AITrends<35 ? array_push($lowscore_blobs,$AITrends_blob) : array_push($highscore_blobs,$AITrends_blob);
+		// echo "<pre>";
+		// print_r($_SESSION['weighted_sum']);
+		// echo "</pre>";
 
-	$sub_heading = $AIStrategy<35 ? "lowscore_result" : "highscore_result";
-	$AIStrategy_blob = get_blob($conn,"AI Strategy",$sub_heading);
-	$AIStrategy<35 ? array_push($lowscore_blobs,$AIStrategy_blob) : array_push($highscore_blobs,$AIStrategy_blob);
+		$graph_val_0 = $_SESSION['weighted_sum'][0]*10;
+		$graph_val_1 = $_SESSION['weighted_sum'][1]*10;
+		$graph_val_2 = $_SESSION['weighted_sum'][2]*10;
+		$graph_val_3 = $_SESSION['weighted_sum'][3]*10;
+		$graph_val_4 = $_SESSION['weighted_sum'][4]*10;
+		$graph_val_5 = $_SESSION['weighted_sum'][5]*10;
+		$graph_val_6 = $_SESSION['weighted_sum'][6]*10;
 
-	$sub_heading = $Organization<35 ? "lowscore_result" : "highscore_result";
-	$Organization_blob = get_blob($conn,"Organization",$sub_heading);
-	$Organization<35 ? array_push($lowscore_blobs,$Organization_blob) : array_push($highscore_blobs,$Organization_blob);
+		$AITrends 		= $graph_val_0;
+		$AIStrategy 	= $graph_val_1;
+		$Organization 	= $graph_val_2;
+		$People	 		= $graph_val_3;
+		$Data 			= $graph_val_4;
+		$Controls 		= $graph_val_5;
+		$ResponsibleAI 	= $graph_val_6;
 
-	$sub_heading = $People<35 ? "lowscore_result" : "highscore_result";
-	$People_blob = get_blob($conn,"People",$sub_heading);
-	$People<35 ? array_push($lowscore_blobs,$People_blob) : array_push($highscore_blobs,$People_blob);
+		$average_of_all = ($graph_val_0 + $graph_val_1 + $graph_val_2 + $graph_val_3 + $graph_val_4 + $graph_val_5 + $graph_val_6)/7;
 
-	$sub_heading = $Data<35 ? "lowscore_result" : "highscore_result";
-	$Data_blob = get_blob($conn,"Data",$sub_heading);
-	$Data<35 ? array_push($lowscore_blobs,$Data_blob) : array_push($highscore_blobs,$Data_blob);
+		$lowscore_blobs  = array();
+		$highscore_blobs = array();
 
-	$sub_heading = $Controls<35 ? "lowscore_result" : "highscore_result";
-	$Controls_blob = get_blob($conn,"Controls",$sub_heading);
-	$Controls<35 ? array_push($lowscore_blobs,$Controls_blob) : array_push($highscore_blobs,$Controls_blob);
+		$sub_heading = $AITrends<35 ? "lowscore_result" : "highscore_result";
+		$AITrends_blob = get_blob($conn,"AITrends",$sub_heading);
+		$AITrends<35 ? array_push($lowscore_blobs,$AITrends_blob) : array_push($highscore_blobs,$AITrends_blob);
 
-	$sub_heading = $ResponsibleAI<35 ? "lowscore_result" : "highscore_result";
-	$ResponsibleAI_blob = get_blob($conn,"Responsible AI",$sub_heading);
-	$ResponsibleAI<35 ? array_push($lowscore_blobs,$ResponsibleAI_blob) : array_push($highscore_blobs,$ResponsibleAI_blob);
+		$sub_heading = $AIStrategy<35 ? "lowscore_result" : "highscore_result";
+		$AIStrategy_blob = get_blob($conn,"AI Strategy",$sub_heading);
+		$AIStrategy<35 ? array_push($lowscore_blobs,$AIStrategy_blob) : array_push($highscore_blobs,$AIStrategy_blob);
+
+		$sub_heading = $Organization<35 ? "lowscore_result" : "highscore_result";
+		$Organization_blob = get_blob($conn,"Organization",$sub_heading);
+		$Organization<35 ? array_push($lowscore_blobs,$Organization_blob) : array_push($highscore_blobs,$Organization_blob);
+
+		$sub_heading = $People<35 ? "lowscore_result" : "highscore_result";
+		$People_blob = get_blob($conn,"People",$sub_heading);
+		$People<35 ? array_push($lowscore_blobs,$People_blob) : array_push($highscore_blobs,$People_blob);
+
+		$sub_heading = $Data<35 ? "lowscore_result" : "highscore_result";
+		$Data_blob = get_blob($conn,"Data",$sub_heading);
+		$Data<35 ? array_push($lowscore_blobs,$Data_blob) : array_push($highscore_blobs,$Data_blob);
+
+		$sub_heading = $Controls<35 ? "lowscore_result" : "highscore_result";
+		$Controls_blob = get_blob($conn,"Controls",$sub_heading);
+		$Controls<35 ? array_push($lowscore_blobs,$Controls_blob) : array_push($highscore_blobs,$Controls_blob);
+
+		$sub_heading = $ResponsibleAI<35 ? "lowscore_result" : "highscore_result";
+		$ResponsibleAI_blob = get_blob($conn,"Responsible AI",$sub_heading);
+		$ResponsibleAI<35 ? array_push($lowscore_blobs,$ResponsibleAI_blob) : array_push($highscore_blobs,$ResponsibleAI_blob);
 
 	}
 	else{
@@ -470,12 +487,12 @@ $graph_val_0 = ($_SESSION['quesVal_mul_weight'][0]/$_SESSION['weightSum'][0])*10
 		<form action="" method="post">
 			<input type="hidden" id="data-input" value="
 			<?=$graph_val_0?>,
-			<?=$graph_val_0;?>,
-			<?=$graph_val_0;?>,
-			<?=$graph_val_0;?>,
-			<?=$graph_val_0;?>,
-			<?=$graph_val_0;?>,
-			<?=$graph_val_0;?>">
+			<?=$graph_val_1;?>,
+			<?=$graph_val_2;?>,
+			<?=$graph_val_3;?>,
+			<?=$graph_val_4;?>,
+			<?=$graph_val_5;?>,
+			<?=$graph_val_6;?>">
 			<!-- <input type="hidden" id="data-input" value="12,49,18,25,33,29,45"> -->
 			<section id="content">
 				<div class="content-wrap">

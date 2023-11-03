@@ -1,7 +1,10 @@
 <?php
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+
+require_once('db.php');
 
 if (isset($_SESSION['id'])) {
 }
@@ -9,8 +12,7 @@ else{
     // echo "<script>window.location.replace('quickscan.php')</script>";
 }
 
-
-require_once('db.php');
+// print_r($_SESSION['weighted_sum']);
 
 // Include library files 
 require 'PHPMailer/src/Exception.php';
@@ -216,7 +218,9 @@ $y = 65;
 $text = "AI Trends";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/aitrends-icon.png',$x-10,$y+2,8,0);
-$pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
+$number = $_SESSION['weighted_sum'][0];
+$image_num = is_int($number)? $number : number_format($number, 1);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -239,7 +243,9 @@ $y = $pdf->GetY()+4;
 $text = "AI Strategy";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/strategy-icon.png',$x-10,$y+0,8,0);
-$pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
+$number = $_SESSION['weighted_sum'][1];
+$image_num = is_int($number)? $number : number_format($number, 1);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -262,7 +268,10 @@ $y = $pdf->GetY()+4;
 $text = "Organization";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/organization-icon.png',$x-10,$y+2,8,0);
-$pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
+$number = $_SESSION['weighted_sum'][2];
+$image_num = is_int($number)? $number : number_format($number, 1);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
+
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -286,7 +295,9 @@ $y = $pdf->GetY()+4;
 $text = "People";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/people-icon.png',$x-10,$y+2,8,0);
-$pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
+$number = $_SESSION['weighted_sum'][3];
+$image_num = is_int($number)? $number : number_format($number, 1);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -310,7 +321,9 @@ $y = $pdf->GetY()+4;
 $text = "Data";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/data-icon.png',$x-10,$y+2,8,0);
-$pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
+$number = $_SESSION['weighted_sum'][4];
+$image_num = is_int($number)? $number : number_format($number, 1);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -334,7 +347,9 @@ $y = $pdf->GetY()+4;
 $text = "Controls";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/controls-icon.png',$x-10,$y+2,8,0);
-$pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
+$number = $_SESSION['weighted_sum'][5];
+$image_num = is_int($number)? $number : number_format($number, 1);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -358,7 +373,9 @@ $y = $pdf->GetY()+4;
 $text = "Responsible AI";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/responsibleai-icon.png',$x-10,$y+2,8,0);
-$pdf->Image('progress_bar_images/3.5.png',$x,$y+4,50,0);
+$number = $_SESSION['weighted_sum'][6];
+$image_num = is_int($number)? $number : number_format($number, 1);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -449,7 +466,7 @@ $mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also
 // Add a recipient 
 $mail->addAddress($receiver_mail);
 
-//$mail->addCC('cc@example.com'); 
+// $mail->addCC('info@dynaminds.ai',"Carbon Copy"); 
 //$mail->addBCC('bcc@example.com'); 
 
 // Set email format to HTML 
