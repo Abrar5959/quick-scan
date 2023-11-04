@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 02, 2023 at 02:49 PM
+-- Generation Time: Nov 04, 2023 at 11:50 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -220,7 +220,21 @@ INSERT INTO `textblobs` (`id`, `main_heading`, `sub_heading`, `text`) VALUES
 (49, 'Controls', 'lowscore_result', 'Improving control over your AI initiatives is essential. Develop rigorous validation, ROI assessment, and risk management processes to ensure your AI tools remain efficient and aligned with organizational standards.'),
 (50, 'Controls', 'highscore_result', 'You\'ve established strong controls and oversight for your AI projects. Keep refining these processes to maintain high-quality standards and responsible AI implementation.'),
 (51, 'Responsible AI', 'lowscore_result', 'Increasing your focus on responsible AI is crucial. Work towards embedding ethics, transparency, and regulatory compliance in all AI-related activities.'),
-(52, 'Responsible AI', 'highscore_result', 'Your commitment to ethical AI practices is exemplary. Continue to build on this by staying ahead of regulatory shifts and fostering a culture of transparency and accountability.');
+(52, 'Responsible AI', 'highscore_result', 'Your commitment to ethical AI practices is exemplary. Continue to build on this by staying ahead of regulatory shifts and fostering a culture of transparency and accountability.'),
+(53, 'AI_trends_suggestion', 'lowscore', 'Research emerging AI technologies; adopt relevant trends; analyze competitors\' AI initiatives.'),
+(54, 'AI_trends_suggestion', 'highscore', 'Stay updated on AI advancements; innovate with new AI trends; monitor competitors\' AI ventures.'),
+(55, 'AI_strategy_suggestion', 'lowscore', 'Align AI with business goals; clarify digital transformation objectives; create a robust AI roadmap.'),
+(56, 'AI_strategy_suggestion', 'highscore', 'Evolve AI strategy with business objectives; explore new AI use cases; ensure AI initiatives align with overarching goals.'),
+(57, 'Organization_suggestion', 'lowscore', 'Assess AI readiness; enhance operational processes; prepare technical infrastructure for AI integration.'),
+(58, 'Organization_suggestion', 'highscore', 'Optimize processes for AI integration; ensure change management readiness; continuously assess technical infrastructure.'),
+(59, 'People_suggestion', 'lowscore', 'Cultivate AI-positive culture; upskill employees; foster AI readiness among staff.'),
+(60, 'People_suggestion', 'highscore', 'Foster AI innovation; encourage continuous learning; engage employees in AI initiatives.'),
+(61, 'Data_suggestion', 'lowscore', 'Improve data quality; enhance data management; prepare data for AI readiness.'),
+(62, 'Data_suggestion', 'highscore', 'Optimize data strategies; explore new data sources; ensure data integrity for AI innovations.'),
+(63, 'Controls_suggestion', 'lowscore', 'Establish metrics for AI initiatives; validate AI outcomes; ensure AI alignment with business goals.'),
+(64, 'Controls_suggestion', 'highscore', 'Refine metrics; ensure continuous relevance of AI; monitor and validate AI outcomes.'),
+(65, 'Responsible_AI_suggestion', 'lowscore', 'Build foundational ethics; establish compliance policies; ensure responsible AI practices.'),
+(66, 'Responsible_AI_suggestion', 'highscore', 'Foster ethical AI innovation; ensure continuous compliance; engage in responsible AI practices.');
 
 --
 -- Indexes for dumped tables
@@ -288,7 +302,7 @@ ALTER TABLE `surveydata`
 -- AUTO_INCREMENT for table `textblobs`
 --
 ALTER TABLE `textblobs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
