@@ -25,7 +25,16 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 
+function get_blob($conn,$main_heading,$sub_heading){
+	$query = "SELECT * FROM textblobs WHERE `main_heading` = ? AND `sub_heading`= ? ";
+	$stmt = $conn->prepare($query);
+	$stmt->bind_param("ss", $main_heading,$sub_heading);
+	$stmt->execute();
+	$result = $stmt->get_result();
+	$row = $result->fetch_assoc();
 
+	return $row['text'];
+}
 // Custom function to insert the PDF cells
 function insert_cell($pdf, $X = 0, $Y = 0, $CellWidth = 0, $CellHeight = 0, $text = "", $border = 0, $alignment = 'L', $fill = false)
 {
@@ -53,12 +62,12 @@ $row = $result->fetch_assoc();
 $id              = $row['id'];
 $companyName     = $row['companyName'];
 $receiver_mail   = $row['email'];
-$date            =  date("d-m-Y"); // DD-MM-YYYY format
+$date            = date("d-m-Y"); // DD-MM-YYYY format
 
 
 $business_sector                    = $row['business_sector'];
 $sector                             = $row['business_sector'];
-$ai_knowledge_board                    = $row['ai_knowledge_board'];
+$ai_knowledge_board                 = $row['ai_knowledge_board'];
 $organization_knowledge_intensity   = $row['organization_knowledge_intensity'];
 
 
@@ -129,39 +138,91 @@ foreach ($choices as $choice) {
 
 }
 
+$sub_heading        = $business_sector;
+$main_heading       = 'sector_specific';
+$business_sector    = get_blob($conn,$main_heading,$sub_heading);
+
+$sub_heading        = $ai_knowledge_board;
+$main_heading       = 'ai_knowledge_board';
+$ai_knowledge_board = get_blob($conn,$main_heading,$sub_heading);
+
+$sub_heading                        = $organization_knowledge_intensity;
+$main_heading                       = 'knowledge_intensity';
+$organization_knowledge_intensity   = get_blob($conn,$main_heading,$sub_heading);
+
+// echo "<pre>";
+// print_r($_SESSION['weighted_sum']);
+// echo "</pre>";
 
 
-$sub_heading = $business_sector;
-$main_heading    = 'sector_specific';
-$query = "SELECT * FROM textblobs WHERE `main_heading` = ? AND `sub_heading`= ? ";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("ss", $main_heading,$sub_heading);
-$stmt->execute();
-$result = $stmt->get_result();    
-$row = $result->fetch_assoc();
-$business_sector = $row['text'];
+$pillar_blobs       = array();
+$suggestion_blobs   = array();
+
+// AI Trends
+$sub_heading            = ($_SESSION['weighted_sum'][0]*10)<35 ? "pillar1_lowscore" : "pillar1_highscore";
+$pillar_blob_text       = get_blob($conn,"AITrends",$sub_heading);
+array_push($pillar_blobs,$pillar_blob_text);
+$sub_heading            = ($_SESSION['weighted_sum'][0]*10)<35 ? "lowscore" : "highscore";
+$suggestion_blob_text   = get_blob($conn,"AI_trends_suggestion",$sub_heading);
+array_push($suggestion_blobs,$suggestion_blob_text);
 
 
-$sub_heading = $ai_knowledge_board;
-$main_heading    = 'ai_knowledge_board';
-$query = "SELECT * FROM textblobs WHERE `main_heading` = ? AND `sub_heading`= ? ";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("ss", $main_heading,$sub_heading);
-$stmt->execute();
-$result = $stmt->get_result();    
-$row = $result->fetch_assoc();
-$ai_knowledge_board = $row['text'];
+// AI Strategy
+$sub_heading            = ($_SESSION['weighted_sum'][1]*10)<35 ? "pillar2_lowscore" : "pillar2_highscore";
+$pillar_blob_text       = get_blob($conn,"AI Strategy",$sub_heading);
+array_push($pillar_blobs,$pillar_blob_text);
+$sub_heading            = ($_SESSION['weighted_sum'][1]*10)<35 ? "lowscore" : "highscore";
+$suggestion_blob_text   = get_blob($conn,"AI_strategy_suggestion",$sub_heading);
+array_push($suggestion_blobs,$suggestion_blob_text);
 
 
-$sub_heading = $organization_knowledge_intensity;
-$main_heading  = 'knowledge_intensity';
-$query = "SELECT * FROM textblobs WHERE `main_heading` = ? AND `sub_heading`= ? ";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("ss", $main_heading,$sub_heading);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
-$organization_knowledge_intensity = $row['text'];
+// Organization
+$sub_heading            = ($_SESSION['weighted_sum'][2]*10)<35 ? "pillar3_lowscore" : "pillar3_highscore";
+$pillar_blob_text       = get_blob($conn,"Organization",$sub_heading);
+array_push($pillar_blobs,$pillar_blob_text);
+$sub_heading            = ($_SESSION['weighted_sum'][2]*10)<35 ? "lowscore" : "highscore";
+$suggestion_blob_text   = get_blob($conn,"Organization_suggestion",$sub_heading);
+array_push($suggestion_blobs,$suggestion_blob_text);
+
+// People
+$sub_heading            = ($_SESSION['weighted_sum'][3]*10)<35 ? "pillar4_lowscore" : "pillar4_highscore";
+$pillar_blob_text       = get_blob($conn,"People",$sub_heading);
+array_push($pillar_blobs,$pillar_blob_text);
+$sub_heading            = ($_SESSION['weighted_sum'][3]*10)<35 ? "lowscore" : "highscore";
+$suggestion_blob_text   = get_blob($conn,"People_suggestion",$sub_heading);
+array_push($suggestion_blobs,$suggestion_blob_text);
+
+// Data
+$sub_heading            = ($_SESSION['weighted_sum'][4]*10)<35 ? "pillar5_lowscore" : "pillar5_highscore";
+$pillar_blob_text       = get_blob($conn,"Data",$sub_heading);
+array_push($pillar_blobs,$pillar_blob_text);
+$sub_heading            = ($_SESSION['weighted_sum'][4]*10)<35 ? "lowscore" : "highscore";
+$suggestion_blob_text   = get_blob($conn,"Data_suggestion",$sub_heading);
+array_push($suggestion_blobs,$suggestion_blob_text);
+
+// Controls
+$sub_heading            = ($_SESSION['weighted_sum'][5]*10)<35 ? "pillar6_lowscore" : "pillar6_highscore";
+$pillar_blob_text       = get_blob($conn,"Controls",$sub_heading);
+array_push($pillar_blobs,$pillar_blob_text);
+$sub_heading            = ($_SESSION['weighted_sum'][5]*10)<35 ? "lowscore" : "highscore";
+$suggestion_blob_text   = get_blob($conn,"Controls_suggestion",$sub_heading);
+array_push($suggestion_blobs,$suggestion_blob_text);
+
+// Responsible AI
+$sub_heading            = ($_SESSION['weighted_sum'][6]*10)<35 ? "pillar7_lowscore" : "pillar7_highscore";
+$pillar_blob_text       = get_blob($conn,"Responsible AI",$sub_heading);
+array_push($pillar_blobs,$pillar_blob_text);
+$sub_heading            = ($_SESSION['weighted_sum'][6]*10)<35 ? "lowscore" : "highscore";
+$suggestion_blob_text   = get_blob($conn,"Responsible_AI_suggestion",$sub_heading);
+array_push($suggestion_blobs,$suggestion_blob_text);
+
+// echo "<pre>";
+// print_r($pillar_blobs);
+// echo "</pre>";
+
+// echo "<pre>";
+// print_r($suggestion_blobs);
+// echo "</pre>";
 
 
 
@@ -224,7 +285,7 @@ $pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
-$text = "Our organization is leveraging AI, enhancing efficiency, innovation, and customer experience. Utilizing machine learning and deep learning, we turn data into actionable insights for informed decision-making. A dedicated AI team crafts custom solutions, ensuring we stay ahead in the digital age.";
+$text = $pillar_blobs[0];
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 // $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -232,7 +293,7 @@ $pdf->SetFont("Poppins", "B", "6");
 $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Poppins", "", "6");
-$text = "                                Invest in ongoing AI education to equip your team with the skills needed to maximize AI's potential.";
+$text = "                                ".$suggestion_blobs[0];
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 // ===============================
@@ -249,7 +310,7 @@ $pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
-$text = "Our AI strategy is rooted in innovation, efficiency, and adaptability. We're focused on harnessing machine learning and AI technologies to process data, gain insights, and enhance decision-making. Custom AI solutions are developed to meet specific organizational needs, ensuring scalability and flexibility. We're committed to staying abreast of AI trends, ensuring our strategy evolves with the technology landscape.";
+$text = $pillar_blobs[1];
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 // $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -257,7 +318,7 @@ $pdf->SetFont("Poppins", "B", "6");
 $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Poppins", "", "6");
-$text = "                                Prioritize a data-centric culture to bolster AI initiatives.";
+$text = "                                ".$suggestion_blobs[1];
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.3, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 // ===============================
@@ -275,7 +336,7 @@ $pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
-$text = "Our organization is a nexus of innovation, efficiency, and adaptability, seamlessly integrating cutting-edge technologies to drive growth. We prioritize a collaborative, data-driven culture, fostering an environment where creativity and technology converge for optimal solutions. Our strategic initiatives are tailored, scalable, and flexible, ensuring we not only meet but exceed our objectives. Our strategic initiatives are tailored, scalable, and flexible, ensuring we not only meet but exceed our objectives.";
+$text = $pillar_blobs[2];
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 // $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -283,7 +344,7 @@ $pdf->SetFont("Poppins", "B", "6");
 $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Poppins", "", "6");
-$text = "                                Foster cross-functional collaboration to amplify innovation.";
+$text = "                                ".$suggestion_blobs[2];
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
@@ -301,7 +362,7 @@ $pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
-$text = "Our people are our greatest asset, embodying a blend of creativity, expertise, and dedication. We foster an environment that encourages continuous learning and innovation. Each member is empowered with the tools and opportunities to excel, contributing to our collective growth and success. Diversity and inclusion are our strengths, driving a rich exchange of ideas and perspectives. Diversity and inclusion are our strengths, driving a rich exchange of ideas and perspectives.";
+$text = $pillar_blobs[3];
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 // $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -309,7 +370,7 @@ $pdf->SetFont("Poppins", "B", "6");
 $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Poppins", "", "6");
-$text = "                                Implement regular skill development programs to enhance team capabilities.";
+$text = "                                ".$suggestion_blobs[3];
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
@@ -327,7 +388,7 @@ $pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
-$text = "Data is the cornerstone of our organization, driving informed decisions and innovative solutions. We harness a wealth of data, transforming it into actionable insights through advanced analytics and AI. Our focus on data integrity, security, and privacy ensures robust, reliable outcomes. Data agility enables us to adapt, offering tailored, efficient solutions to complex challenges. Data agility enables us to adapt, offering tailored, efficient solutions to complex challenges. ";
+$text = $pillar_blobs[4];
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 // $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -335,7 +396,7 @@ $pdf->SetFont("Poppins", "B", "6");
 $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Poppins", "", "6");
-$text = "                                Adopt a comprehensive data governance framework to enhance quality and security within your organization.";
+$text = "                                ".$suggestion_blobs[4];
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
@@ -353,7 +414,7 @@ $pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
-$text = "Controls are integral in our organization, ensuring efficiency, security, and compliance. We implement rigorous protocols, utilizing advanced technologies to monitor, analyze, and optimize operations. Our controls are adaptive, evolving with emerging risks and opportunities, safeguarding assets and data. They are meticulously designed to enhance transparency, accountability, and performance.";
+$text = $pillar_blobs[5];
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 // $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -361,7 +422,7 @@ $pdf->SetFont("Poppins", "B", "6");
 $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Poppins", "", "6");
-$text = "                                Regularly update and test control mechanisms to ensure their effectiveness and adaptability.";
+$text = "                                ".$suggestion_blobs[5];
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
@@ -379,7 +440,7 @@ $pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
-$text = "Responsible AI is at the core of our ethos, ensuring that our AI initiatives are ethical, fair, and transparent. We prioritize the development and deployment of AI technologies that respect human rights, privacy, and equality. Our guidelines are stringent, ensuring AI applications are designed and used in ways that are just, unbiased, and accountable. We continuously monitor and refine our AI practices to uphold the highest ethical standards.";
+$text = $pillar_blobs[6];
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 // $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -387,7 +448,7 @@ $pdf->SetFont("Poppins", "B", "6");
 $text = "Our suggestion:";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->SetFont("Poppins", "", "6");
-$text = "                               Embed ethical reviews in AI development processes to ensure fairness and transparency.";
+$text = "                                ".$suggestion_blobs[6];
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 $pdf->SetFont("Poppins", "B", "10");
