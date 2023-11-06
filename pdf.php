@@ -150,6 +150,11 @@ $sub_heading                        = $organization_knowledge_intensity;
 $main_heading                       = 'knowledge_intensity';
 $organization_knowledge_intensity   = get_blob($conn,$main_heading,$sub_heading);
 
+
+$sub_heading    = '';
+$main_heading   = 'end_quote';
+$end_quote      = get_blob($conn,$main_heading,$sub_heading);
+
 // echo "<pre>";
 // print_r($_SESSION['weighted_sum']);
 // echo "</pre>";
@@ -242,7 +247,7 @@ $pdf->SetMargins(0,0,0);
 $x = 10;
 $y = 10;
 $pdf->SetXY($x,$y);
-$pdf->SetFont("Poppins", "M", "15");
+$pdf->SetFont("Poppins", "", "20");
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth = 0, $CellHeight = 0, $text = "AI Readiness Quickscan", $border = 0, $alignment = 'L', $fill = false);
 
 $pdf->Image('output-graph/chart.png',130,6,60,0);
@@ -251,15 +256,26 @@ $pdf->SetFont("Poppins", "", "7");
 
 $x = 10;
 $y = 20;
-$pdf->SetXY($x,$y);
-$text = "Report for: {$companyName}";
-$pdf->MultiCell(100,6,$text,0);
-
-$x = 10;
-$y = $pdf->GetY();
-$text = "Sector: {$sector}";
+$text = "Report for :";
+insert_MultiCell($pdf, $X = $x, $Y = $y, $width=100 ,$height=3.5 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
+$pdf->SetFont("Poppins", "B", "7");
+$x += 14;
+$text = " {$companyName}";
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=100 ,$height=3.5 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
+
+
+$pdf->SetFont("Poppins", "", "7");
+$x = 10;
+$y = $pdf->GetY();
+$text = "Sector : ";
+insert_MultiCell($pdf, $X = $x, $Y = $y, $width=100 ,$height=3.5 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
+$pdf->SetFont("Poppins", "B", "7");
+$x += 10;
+$text = "{$sector}";
+insert_MultiCell($pdf, $X = $x, $Y = $y, $width=100 ,$height=3.5 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
+
+$pdf->SetFont("Poppins", "", "7");
 $x = 10;
 $y = $pdf->GetY();
 $text = "Date generated: {$date}";
@@ -274,7 +290,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.7 ,$text=$text ,$
 
 
 $pdf->SetFont("Poppins", "", "10");
-$x = 18;
+$x = 22;
 $y = 65;
 $text = "AI Trends";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
@@ -299,7 +315,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$tex
 // ===============================
 
 $pdf->SetFont("Poppins", "", "10");
-$x = 18;
+$x = 22;
 $y = $pdf->GetY()+4;
 $text = "AI Strategy";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
@@ -324,7 +340,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.3, $width=120 ,$height=3.2 ,$text=$tex
 // ===============================
 
 $pdf->SetFont("Poppins", "", "10");
-$x = 18;
+$x = 22;
 $y = $pdf->GetY()+4;
 $text = "Organization";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
@@ -351,7 +367,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$tex
 // ===============================
 
 $pdf->SetFont("Poppins", "", "10");
-$x = 18;
+$x = 22;
 $y = $pdf->GetY()+4;
 $text = "People";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
@@ -377,7 +393,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$tex
 // ===============================
 
 $pdf->SetFont("Poppins", "", "10");
-$x = 18;
+$x = 22;
 $y = $pdf->GetY()+4;
 $text = "Data";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
@@ -403,7 +419,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$tex
 // ===============================
 
 $pdf->SetFont("Poppins", "", "10");
-$x = 18;
+$x = 22;
 $y = $pdf->GetY()+4;
 $text = "Controls";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
@@ -429,7 +445,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$tex
 // ===============================
 
 $pdf->SetFont("Poppins", "", "10");
-$x = 18;
+$x = 22;
 $y = $pdf->GetY()+4;
 $text = "Responsible AI";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
@@ -460,9 +476,10 @@ $y = $pdf->GetY()+6;
 $pdf->SetFont("Poppins", "", "6");
 $text = "";
 $text  = $ai_goals_text;
+$text .= $organization_knowledge_intensity;
 $text .= $business_sector;
 $text .= $ai_knowledge_board;
-$text .= $organization_knowledge_intensity;
+$text .= $end_quote;
 $text .= mb_convert_encoding($text, 'ISO-8859-1', 'UTF-8');
 // $text .= mb_convert_encoding("Your organization is adeptly navigating the AI landscape, integrating intelligent solutions that enhance efficiency and innovation. AI is a catalyst in our sector, driving personalized customer experiences and streamlined operations. We've adopted AI to analyze complex data, yielding insights for strategic decisions. Office work intensity has escalated due to AI. Automation optimizes tasks, allowing focus on value-added activities and innovation. AI's role is pivotal; we're evolving with this technology, ensuring alignment with trends and ethical standards. We're committed to evolving with AI, ensuring our strategies align with emerging trends, prioritizing ethical and transparent AI applications. The continuous learning and adaptation fostered by AI is nurturing a culture of perpetual improvement within our organization, stimulating a forward-thinking mindset among our teams. By closely monitoring the evolving AI landscape and actively engaging in community dialogues around responsible AI, we are not only staying ahead of technological advancements but also fostering a robust ethical foundation that underscores our AI-driven initiatives.", 'ISO-8859-1', 'UTF-8');
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
@@ -490,7 +507,7 @@ insert_MultiCell($pdf, $X = 160, $Y = $y+7, $width=45 ,$height=2.8 ,$text=$text 
 
 
 $filename = 'outputs/Dynaminds_AI_Quickcan.pdf';
-$pdf->Output("F", $filename);
+$pdf->Output("I", $filename);
 
 
 
@@ -516,10 +533,10 @@ $mail->setFrom('sender@gmail.com', 'PDF test');
 
 
 
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;    //Enable implicit TLS encryption
 $mail->Port       = 587;
-$mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
-//    $mail->Port = 465;                          // TCP port to connect to
+$mail->SMTPSecure = 'tls';                          // Enable TLS encryption, `ssl` also accepted
+//    $mail->Port = 465;                            // TCP port to connect to
 
 // Sender info 
 //    $mail->addReplyTo('reply@example.com', 'SenderName'); 

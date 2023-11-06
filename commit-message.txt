@@ -1,0 +1,6 @@
+- Some visual tweaks included as in the picture sent in last msg.
+- Made adjustments to structure for the bottom part of the output.
+- Output pdf is saved with company name now.
+- Only 2 lowscore texts presented now.
+- Made all fields necessary to be filled out by user. (if you want some to be optional then please point them out so I can incorporate the changes in different way so PDf gets generated without error if user doesn't provide that optional field)
+- Phone number validation added
