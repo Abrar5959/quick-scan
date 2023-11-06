@@ -506,8 +506,9 @@ www.dynaminds.ai | info@dynaminds.ai ";
 insert_MultiCell($pdf, $X = 160, $Y = $y+7, $width=45 ,$height=2.8 ,$text=$text ,$border=0 ,$alignment='C' ,$fill=false);
 
 
-$filename = 'outputs/Dynaminds_AI_Quickcan.pdf';
-$pdf->Output("I", $filename);
+$filename = "outputs/{$companyName}.pdf";
+$pdf->Output("F", $filename);
+
 
 
 

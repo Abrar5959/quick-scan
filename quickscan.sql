@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 04, 2023 at 11:50 PM
+-- Generation Time: Nov 06, 2023 at 08:44 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -234,7 +234,8 @@ INSERT INTO `textblobs` (`id`, `main_heading`, `sub_heading`, `text`) VALUES
 (63, 'Controls_suggestion', 'lowscore', 'Establish metrics for AI initiatives; validate AI outcomes; ensure AI alignment with business goals.'),
 (64, 'Controls_suggestion', 'highscore', 'Refine metrics; ensure continuous relevance of AI; monitor and validate AI outcomes.'),
 (65, 'Responsible_AI_suggestion', 'lowscore', 'Build foundational ethics; establish compliance policies; ensure responsible AI practices.'),
-(66, 'Responsible_AI_suggestion', 'highscore', 'Foster ethical AI innovation; ensure continuous compliance; engage in responsible AI practices.');
+(66, 'Responsible_AI_suggestion', 'highscore', 'Foster ethical AI innovation; ensure continuous compliance; engage in responsible AI practices.'),
+(67, 'end_quote', '', 'How does your organization remain relevant? Challenge your AI transformation readiness with the above framework, in order to prepare your organization for its biggest disruptive innovation it has ever faced.');
 
 --
 -- Indexes for dumped tables
@@ -302,7 +303,7 @@ ALTER TABLE `surveydata`
 -- AUTO_INCREMENT for table `textblobs`
 --
 ALTER TABLE `textblobs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
