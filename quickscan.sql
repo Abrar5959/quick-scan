@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 06, 2023 at 08:44 PM
+-- Generation Time: Nov 08, 2023 at 08:47 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -149,6 +149,7 @@ CREATE TABLE `surveydata` (
   `strategic_advancement` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `operational_efficiency` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
   `quality_enhancement` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `contactPermission` tinyint(4) NOT NULL DEFAULT 0,
   `other` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
