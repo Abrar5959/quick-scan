@@ -1,2 +1,3 @@
-- Saved the PDF file with company's name
-- DB file udpated (added new textblob 'end_quote')
+2) The pdf is now named as Dynaminds_AI_Quickscan_{$companyName}.pdf
+3) 'Message has been sent' user friendly ux message is shown and then redirect the respondent to the main page
+4) Contact Permission field added to database

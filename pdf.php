@@ -506,7 +506,7 @@ www.dynaminds.ai | info@dynaminds.ai ";
 insert_MultiCell($pdf, $X = 160, $Y = $y+7, $width=45 ,$height=2.8 ,$text=$text ,$border=0 ,$alignment='C' ,$fill=false);
 
 
-$filename = "outputs/{$companyName}.pdf";
+$filename = "outputs/Dynaminds_AI_Quickscan_{$companyName}.pdf";
 $pdf->Output("F", $filename);
 
 
@@ -576,9 +576,14 @@ $mail->addAttachment($filename);
 
 // Send email 
 if (!$mail->send()) {
-    echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
+    $_SESSION['msg-type'] = "danger";
+    $_SESSION['msg-text'] = "Message could not be sent.";
+    // echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
     // return false;
 } else {
-    echo 'Message has been sent.'; 
+    $_SESSION['msg-type'] = "danger";
+    $_SESSION['msg-text'] = "Message has been sent.";
+    // echo 'Message has been sent.'; 
     // return true;
 }
+echo "<script>window.location.replace('end.php')</script>";

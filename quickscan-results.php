@@ -86,11 +86,12 @@ if (isset($_POST['generate-quickscan-submit'])) {
 			strategic_advancement = ?, 
 			operational_efficiency = ?, 
 			quality_enhancement = ?, 
+			contactPermission = ?, 
 			other = ?
 			WHERE id = ?";
 
 		$stmt = $conn->prepare($sql);
-		$stmt->bind_param("ssssssssssi", $email, $companyName, $phone, $business_sector, $ai_knowledge_board, $knowledge_intensity, $strategicAdvancementSerialized, $operationalEfficiencySerialized, $productServiceInnovationSerialized, $otherSerialized, $_SESSION['id']);
+		$stmt->bind_param("sssssssssisi", $email, $companyName, $phone, $business_sector, $ai_knowledge_board, $knowledge_intensity, $strategicAdvancementSerialized, $operationalEfficiencySerialized, $productServiceInnovationSerialized, $contactPermission, $otherSerialized, $_SESSION['id']);
 
 		if ($stmt->execute()) {
 			unset($_SESSION['pillarArray']);

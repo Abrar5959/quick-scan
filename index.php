@@ -561,15 +561,15 @@ if (isset($_SESSION['pillarArray'])) {
 									</div>
 								</div>
 								<div class="row" style="padding-top: 20px;">
-									<div class="col-md-10">
+									<div class="col-md-9">
 										<p>
 											<i>
 												Please note that by hitting the "Show the results" button to the right, your input will be stored in our database.
 											</i>
 										</p>
 									</div>
-									<div class="col-md-2" style="text-align: right;">
-										<button type="submit" name="step1" id="showGraphButton">Show the results</button>
+									<div class="col-md-3" style="text-align: right;">
+										<button type="submit" class="btn btn-secondary btn-lg" name="step1" id="showGraphButton">Show the results</button>
 									</div>
 								</div>
 							</form> <!-- Closing form tag -->
