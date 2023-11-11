@@ -25,6 +25,12 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 
+function sanitizeFileName($fileName) {
+    // Remove special characters, leaving only alphanumeric characters and underscores
+    return preg_replace('/[^\w]/', '', $fileName);
+}
+
+
 function get_blob($conn,$main_heading,$sub_heading){
 	$query = "SELECT * FROM textblobs WHERE `main_heading` = ? AND `sub_heading`= ? ";
 	$stmt = $conn->prepare($query);
@@ -506,7 +512,9 @@ www.dynaminds.ai | info@dynaminds.ai ";
 insert_MultiCell($pdf, $X = 160, $Y = $y+7, $width=45 ,$height=2.8 ,$text=$text ,$border=0 ,$alignment='C' ,$fill=false);
 
 
-$filename = "outputs/Dynaminds_AI_Quickscan_{$companyName}.pdf";
+$sanitizedcompanyName = sanitizeFileName($companyName);
+$filename = "outputs/Dynaminds_AI_Quickscan_{$sanitizedcompanyName}.pdf";
+// $filename = "outputs/Dynaminds_AI_Quickscan_{$companyName}.pdf";
 $pdf->Output("F", $filename);
 
 
@@ -557,7 +565,7 @@ $mail->Subject = 'Test Mail with Attachment';
 // Mail body content 
 $bodyContent = '<p>Dear Reader,</p><br>';
 $bodyContent .= "<p>I hope this message finds you well. Herewith, you’ll receive the AI Quickscan results based on the input you provided us. The Quickscan is a one-pager that outlines key insights and potential opportunities tailored for you.</p>";
-$bodyContent .= "<p><strong>Attachment:</strong> Dynaminds_AI_Quickcan.pdf</p>";
+$bodyContent .= "<p><strong>Attachment:</strong> {$filename}</p>";
 $bodyContent .= "<p>This one-pager is designed to give you a concise yet comprehensive view of the current AI landscape as it applies to your specific context.</p>";
 $bodyContent .= "<p>We believe that the AI Quickscan will provide you with valuable insights and a clear direction on how to proceed with AI initiatives in your organization. It is formatted for easy sharing, should you wish to discuss the contents with your team.</p>";
 $bodyContent .= "<p>Should you have any questions, or if you would like to schedule a follow-up discussion to delve deeper into any aspect of the report, do not hesitate to contact us. If you indicated you would like us to contact you to discuss the results, we will do so in the following 3 workdays. </p>";
@@ -581,9 +589,13 @@ if (!$mail->send()) {
     // echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
     // return false;
 } else {
-    $_SESSION['msg-type'] = "danger";
+    $_SESSION['msg-type'] = "success";
     $_SESSION['msg-text'] = "Message has been sent.";
     // echo 'Message has been sent.'; 
     // return true;
 }
+
+
+unlink($filename);
+
 echo "<script>window.location.replace('end.php')</script>";

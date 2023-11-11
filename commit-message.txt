@@ -1,3 +1,4 @@
-2) The pdf is now named as Dynaminds_AI_Quickscan_{$companyName}.pdf
-3) 'Message has been sent' user friendly ux message is shown and then redirect the respondent to the main page
-4) Contact Permission field added to database
+1) csrf token implementation - quickscan-results.php
+2) The pdf name sanitized properly to exlucde any special symbols - pdf.php
+3) phone number validation added to form - quickscan-results.php
+4) File deleted from server after sending it in mail - pdf.php

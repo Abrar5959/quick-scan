@@ -6,6 +6,11 @@ error_reporting(E_ALL);
 require_once('db.php');
 
 
+// Generate CSRF token
+if (!isset($_SESSION['csrf_token'])) {
+	$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 function get_blob($conn, $main_heading, $sub_heading)
 {
 	$query = "SELECT * FROM textblobs WHERE `main_heading` = ? AND `sub_heading`= ? ";
@@ -18,8 +23,14 @@ function get_blob($conn, $main_heading, $sub_heading)
 	return $row['text'];
 }
 
-if (isset($_POST['generate-quickscan-submit'])) {
-	if (isset($_SESSION['pillarArray'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate-quickscan-submit'])) {
+	if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+		// Invalid CSRF token, handle accordingly (e.g., show an error message, log the incident)
+		die('Invalid CSRF Token');
+	} else if (isset($_SESSION['pillarArray'])) {
+
+		// Regenerate CSRF token
+		$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 
 		$email 					= $_POST["email"];
 		$phone 					= isset($_POST['phone']) ? $_POST['phone'] : '';
@@ -460,7 +471,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 								</ul>
 							</li>
 							<li class="menu-item contact-item">
-								<div class="desktop-text" style="font-size: 15px; padding-right: 10px; padding-left: 12px;">Let's get in touch: +31 345 79 5005</div> <!-- Plain text for desktop -->
+								<!-- <div class="desktop-text" style="font-size: 15px; padding-right: 10px; padding-left: 12px;">Let's get in touch: +31 345 79 5005</div> Plain text for desktop -->
 								<a class="menu-link mobile" href="tel:+31345795005" style="font-size: 15px;">
 									<div>Let's get in touch: +31 345 79 5005</div>
 								</a> <!-- Link for mobile -->
@@ -474,6 +485,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 	</header><!-- #header end -->
 	<!-- Content ============================================= -->
 	<form action="" method="post" onsubmit="return validateForm()">
+		<input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token']; ?>">
 		<input type="hidden" id="data-input" value="
 			<?= $graph_val_0 ?>,
 			<?= $graph_val_1; ?>,
@@ -493,7 +505,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 						<h2 class="text-start text-md-center font-body mb-6">Quickscan Results: Your organization's AI Transformation Readiness</h2>
 						</p>
 						<div class="row">
-							<div class="col-8">
+							<div class="col-7">
 								<?php
 								if ($average_of_all < 35) {
 									$score_blob = "
@@ -550,7 +562,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 											The above provides an initial grasp of the AI Readiness within your organization. For a free and more detailed Quickscan, please follow the instructions below.
 										</p>
 							</div>
-							<div class="col-4">
+							<div class="col-5">
 								<canvas id="myChart"></canvas>
 								<!-- <img src="images/quickscan-chart-demo.png" alt="Polar Chart"> -->
 							</div>
@@ -1133,7 +1145,9 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 			options: {
 				animation: {
 					onComplete: function() {
-						imageData = myChart.toBase64Image();
+						// imageData = myChart.toBase64Image();
+						imageData = myChart.toBase64Image('image/png', 1);
+
 						saveChartAsImage(imageData);
 					}
 				},
@@ -1164,22 +1178,6 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 
 		const ctx = document.getElementById('myChart').getContext('2d');
 		const myChart = new Chart(ctx, config);
-		// console.log("checkpoint1");
-
-		// var imageData = myChart.toBase64Image();
-		// console.log(imageData);
-
-		// setTimeout(saveChartAsImage(myChart), 1000);
-
-
-		// myChart.render(function () {
-		// 	// Export the chart as an image when it's fully loaded
-		// 	console.log("checkpoint2");
-		// 	var imageData = chart.toBase64Image();
-		// 	saveChartAsImage(imageData);
-		// });
-
-		// console.log("checkpoint3");
 	</script>
 
 	<script src="js/functions.js"></script>
@@ -1191,17 +1189,35 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 		VANTA.WAVES(vantaConfig);
 	</script>
 	<script>
-			function validateForm() {
-				var phoneNumber = document.getElementById("phone").value;
-				var pattern = /(\([0-9]{3}\)|[0-9]{3})[ -]?[0-9]{3}[ -]?[0-9]{4}/;
-
-				if (pattern.test(phoneNumber)) {
-					return true; // Form will be submitted
-				} else {
-					alert("Invalid phone number. Please enter a valid phone number.");
-					return false; // Form submission will be prevented
+		function sanitizeFileName(fileName) {
+			// Remove special characters, leaving only alphanumeric characters and underscores
+			return fileName.replace(/[^\w]/g, '');
+		}
+		function validatePhoneNumber(phoneNumber) {
+			// var pattern = /(\([0-9]{3}\)|[0-9]{3})[ -]?[0-9]{3}[ -]?[0-9]{4}/;
+			var pattern = /^(\([0-9]{3}\)|[0-9]{3})[ -]?[0-9]{3}[ -]?[0-9]{4}$/;
+			return pattern.test(phoneNumber);
+		}
+		function validateCompanyName(companyName) {
+			// Add your company name validation logic here
+			// For example, check if the company name is not empty
+			return companyName.trim() !== '';
+		}
+		function validateForm() {
+			var phoneNumber = document.getElementById("phone").value;
+			var companyName = document.getElementById("companyName").value;
+			if (validatePhoneNumber(phoneNumber) && validateCompanyName(companyName)) {
+				return true; // Form will be submitted
+			} else {
+				if (!validatePhoneNumber(phoneNumber)) {
+					alert("Invalid phone number. Phone number must match the pattern.");
 				}
+				if (!validateCompanyName(companyName)) {
+					alert("Invalid company name. Please enter a valid company name.");
+				}
+				return false; // Form submission will be prevented
 			}
+		}
 	</script>
 </body>
 </html>
