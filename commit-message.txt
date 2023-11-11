@@ -1,4 +1,2 @@
-1) csrf token implementation - quickscan-results.php
-2) The pdf name sanitized properly to exlucde any special symbols - pdf.php
-3) phone number validation added to form - quickscan-results.php
-4) File deleted from server after sending it in mail - pdf.php
+1) Font-size and family of graph changed
+2) undefined key 1 at quick-results.php page fixed

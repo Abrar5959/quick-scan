@@ -8,7 +8,7 @@ require_once('db.php');
 
 // Generate CSRF token
 if (!isset($_SESSION['csrf_token'])) {
-	$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
 
 function get_blob($conn, $main_heading, $sub_heading)
@@ -25,9 +25,9 @@ function get_blob($conn, $main_heading, $sub_heading)
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['generate-quickscan-submit'])) {
 	if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-		// Invalid CSRF token, handle accordingly (e.g., show an error message, log the incident)
-		die('Invalid CSRF Token');
-	} else if (isset($_SESSION['pillarArray'])) {
+        // Invalid CSRF token, handle accordingly (e.g., show an error message, log the incident)
+        die('Invalid CSRF Token');
+    } else if (isset($_SESSION['pillarArray'])) {
 
 		// Regenerate CSRF token
 		$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
@@ -515,7 +515,11 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 									echo $score_blob;
 									if (!empty($lowscore_blobs)) {
 										echo "<p>- {$lowscore_blobs[0]}</p>";
-										echo "<p>- {$lowscore_blobs[1]}</p>";
+										// echo "<p>- {$lowscore_blobs[1]}</p>";
+										echo "<p>";
+										echo isset($lowscore_blobs[1])?"- ".$lowscore_blobs[1]:'';
+										echo "</p>";
+										
 									}
 									// foreach ($lowscore_blobs as $blob) {
 									// 	echo "<p>- {$blob}</p>";
@@ -526,7 +530,10 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 										// 	echo "<p>- {$blob}</p>";
 										// }
 										echo "<p>- {$highscore_blobs[0]}</p>";
-										echo "<p>- {$highscore_blobs[1]}</p>";
+										// echo "<p>- {$highscore_blobs[1]}</p>";
+										echo "<p>";
+										echo isset($highscore_blobs[1])?"- ".$highscore_blobs[1]:'';
+										echo "</p>";
 									}
 								} else if ($average_of_all > 35) {
 									$score_blob = "
@@ -536,7 +543,9 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 									echo $score_blob;
 									if (!empty($highscore_blobs)) {
 										echo "<p>- {$highscore_blobs[0]}</p>";
-										echo "<p>- {$highscore_blobs[1]}</p>";
+										echo "<p>";
+										echo isset($highscore_blobs[1])?"- ".$highscore_blobs[1]:'';
+										echo "</p>";
 									}
 									// foreach ($highscore_blobs as $blob) {
 									// 	echo "<p>- {$blob}</p>";
@@ -547,7 +556,9 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 										// 	echo "<p>- {$blob}</p>";
 										// }
 										echo "<p>- {$lowscore_blobs[0]}</p>";
-										echo "<p>- {$lowscore_blobs[1]}</p>";
+										echo "<p>";
+										echo isset($lowscore_blobs[1])?"- ".$lowscore_blobs[1]:'';
+										echo "</p>";
 									}
 								}
 
@@ -1147,7 +1158,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 					onComplete: function() {
 						// imageData = myChart.toBase64Image();
 						imageData = myChart.toBase64Image('image/png', 1);
-
+						
 						saveChartAsImage(imageData);
 					}
 				},
@@ -1163,7 +1174,8 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 							display: true,
 							centerPointLabels: true,
 							font: {
-								size: 10
+								family: 'Poppins',  // Set the font family to Poppins
+								size: 16
 							}
 						}
 					}
@@ -1189,7 +1201,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 		VANTA.WAVES(vantaConfig);
 	</script>
 	<script>
-		function sanitizeFileName(fileName) {
+function sanitizeFileName(fileName) {
 			// Remove special characters, leaving only alphanumeric characters and underscores
 			return fileName.replace(/[^\w]/g, '');
 		}
@@ -1203,21 +1215,21 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 			// For example, check if the company name is not empty
 			return companyName.trim() !== '';
 		}
-		function validateForm() {
-			var phoneNumber = document.getElementById("phone").value;
-			var companyName = document.getElementById("companyName").value;
-			if (validatePhoneNumber(phoneNumber) && validateCompanyName(companyName)) {
-				return true; // Form will be submitted
-			} else {
-				if (!validatePhoneNumber(phoneNumber)) {
+			function validateForm() {
+				var phoneNumber = document.getElementById("phone").value;
+				var companyName = document.getElementById("companyName").value;
+				if (validatePhoneNumber(phoneNumber) && validateCompanyName(companyName)) {
+					return true; // Form will be submitted
+				} else {
+					if (!validatePhoneNumber(phoneNumber)) {
 					alert("Invalid phone number. Phone number must match the pattern.");
 				}
 				if (!validateCompanyName(companyName)) {
 					alert("Invalid company name. Please enter a valid company name.");
+}
+					return false; // Form submission will be prevented
 				}
-				return false; // Form submission will be prevented
 			}
-		}
 	</script>
 </body>
 </html>
