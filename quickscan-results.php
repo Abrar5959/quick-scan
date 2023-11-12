@@ -411,78 +411,146 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 	<link rel="manifest" href="/site.webmanifest">
 	<!-- Document Title ============================================= -->
-	<title>Dynaminds | Quickscan Results</title>
+	<title>Dynaminds | AI Readiness Quickscan Results</title>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body class="stretched">
-	<!-- Header ============================================= -->
-	<section id="slider2" class="slider-element include-header" style="height: 200px; z-index: 0; position: absolute;">
-		<div class="slider-inner" id="vanta-output"></div>
-	</section>
-	<header id="header" class="transparent-header dark" data-sticky-class="not-dark" data-responsive-class="not-dark" data-sticky-logo-height="80" data-sticky-menu-padding="29">
-		<div id="header-wrap">
-			<div class="container">
-				<div class="header-row justify-content-lg-between">
-					<!-- Logo ============================================= -->
-					<div id="logo" class="col-auto order-lg-2 me-lg-0 px-0">
-						<a href="index.html">
-							<img class="logo-default" srcset="images/logo.png, images/logo@2x.png 2x" src="images/logo@2x.png" alt="Dynaminds Logo">
-							<img class="logo-dark" srcset="images/logo-dark.png, images/logo-dark@2x.png 2x" src="images/logo-dark@2x.png" alt="Dynaminds Logo">
-						</a>
-					</div><!-- #logo end -->
-					<div class="primary-menu-trigger">
-						<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
-							<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
-						</button>
+		<!-- Header
+
+		============================================= -->
+
+		<section id="slider2" class="slider-element include-header" style="height: 200px; z-index: 0; position: absolute;">
+			<div class="slider-inner" id="vanta-output"></div>
+		</section>
+
+
+		<header id="header" class="transparent-header dark" data-sticky-class="not-dark" data-responsive-class="not-dark" data-sticky-logo-height="80" data-sticky-menu-padding="29">
+
+			<div id="header-wrap">
+
+				<div class="container">
+
+					<div class="header-row justify-content-lg-between">
+
+
+						<!-- Logo
+
+						============================================= -->
+
+						<div id="logo" class="col-auto order-lg-2 me-lg-0 px-0">
+
+							<a href="index.html">
+
+								<img class="logo-default" srcset="images/logo.png, images/logo@2x.png 2x" src="images/logo@2x.png" alt="Dynaminds Logo">
+
+								<img class="logo-dark" srcset="images/logo-dark.png, images/logo-dark@2x.png 2x" src="images/logo-dark@2x.png" alt="Dynaminds Logo">
+
+							</a>
+
+						</div><!-- #logo end -->
+
+
+
+						<div class="primary-menu-trigger">
+
+							<button class="cnvs-hamburger" type="button" title="Open Mobile Menu">
+
+								<span class="cnvs-hamburger-box"><span class="cnvs-hamburger-inner"></span></span>
+
+							</button>
+
+						</div>
+
+
+
+						<!-- Primary Navigation
+
+						============================================= -->
+
+						<nav class="primary-menu with-arrows col-lg-5 order-lg-1 px-0">
+
+
+
+							<ul class="menu-container one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
+							
+								<li class="menu-item"><a class="menu-link" href="index.html"><div>Home</div></a></li>
+
+								<li class="menu-item"><a class="menu-link" href="index.html#section-bridging-the-gap"><div>Bridging the gap</div></a></li>
+
+								<li class="menu-item"><a class="menu-link" href="index.html#section-our-approach"><div>Our Approach</div></a></li>
+
+							</ul>
+
+
+
+						</nav>
+
+
+
+						<nav class="primary-menu col-lg-5 order-lg-3 px-0">
+
+
+
+							<ul class="menu-container justify-content-lg-end one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
+							
+							<li class="menu-item"><a class="menu-link"><div>Services</div></a>
+
+									<ul class="sub-menu-container" data-class="up-lg:not-dark">
+
+										<li class="menu-item"><a class="menu-link" href="state-of-ai-workshop.html"><div>State of AI Workshop</div></a></li>
+
+										<!-- <li class="menu-item"><a class="menu-link" href="#" data-href="#section-stunning-graphics"><div>AI Impact Assessment</div></a></li> -->
+
+										<li class="menu-item"><a class="menu-link" href="ai-advisor-to-the-board.html"><div>AI Advisor to the Board</div></a></li>
+										
+										<!-- <li class="menu-item"><a class="menu-link" href="#" data-href="#section-secured-solutions"><div>AI Audit Services</div></a></li> -->
+
+									</ul>
+
+								</li>
+
+								<!-- <li class="menu-item"><a class="menu-link" href="blog.html"><div>Our Blog</div></a></li> -->
+								
+								<li class="menu-item contact-item">
+									<div class="desktop-text" style="font-size: 15px; padding-right: 10px; padding-left: 12px;">Let's get in touch: +31 345 79 5005</div>  <!-- Plain text for desktop -->
+									<a class="menu-link mobile" href="tel:+31345795005" style="font-size: 15px;"><div>Let's get in touch: +31 345 79 5005</div></a>  <!-- Link for mobile -->
+								</li>
+								<!--
+								<li class="menu-item language-selector" style="white-space: nowrap;">
+									<a class="menu-link" href="/index.html" style="display: inline-block; font-weight: bold;">
+										<div class="short-lang">EN</div>
+										<div class="full-lang">English</div>
+									</a>
+								</li>
+								<span class="language-separator">|</span>
+								<li class="menu-item language-selector" style="white-space: nowrap;">	
+									<a class="menu-link" href="nl/index.html" style="display: inline-block;">
+										<div class="short-lang">NL</div>
+										<div class="full-lang">Nederlands</div>
+									</a>
+								</li>
+								-->
+
+
+							</ul>
+
+
+
+						</nav><!-- #primary-menu end -->
+
+
+
 					</div>
-					<!-- Primary Navigation ============================================= -->
-					<nav class="primary-menu with-arrows col-lg-5 order-lg-1 px-0">
-						<ul class="menu-container one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
-							<li class="menu-item"><a class="menu-link" href="index.html">
-									<div>Home</div>
-								</a>
-							</li>
-							<li class="menu-item"><a class="menu-link" href="index.html#section-bridging-the-gap">
-									<div>Bridging the gap</div>
-								</a>
-							</li>
-							<li class="menu-item"><a class="menu-link" href="index.html#section-our-approach">
-									<div>Our Approach</div>
-								</a>
-							</li>
-						</ul>
-					</nav>
-					<nav class="primary-menu col-lg-5 order-lg-3 px-0">
-						<ul class="menu-container justify-content-lg-end one-page-menu" data-easing="easeInOutExpo" data-speed="1250" data-offset="160">
-							<li class="menu-item"><a class="menu-link">
-									<div>Services</div>
-								</a>
-								<ul class="sub-menu-container" data-class="up-lg:not-dark">
-									<li class="menu-item"><a class="menu-link" href="state-of-ai-workshop.html">
-											<div>State of AI Workshop</div>
-										</a>
-									</li>
-									<li class="menu-item"><a class="menu-link" href="ai-advisor-to-the-board.html">
-											<div>AI Advisor to the Board</div>
-										</a>
-									</li>
-								</ul>
-							</li>
-							<li class="menu-item contact-item">
-								<!-- <div class="desktop-text" style="font-size: 15px; padding-right: 10px; padding-left: 12px;">Let's get in touch: +31 345 79 5005</div> Plain text for desktop -->
-								<a class="menu-link mobile" href="tel:+31345795005" style="font-size: 15px;">
-									<div>Let's get in touch: +31 345 79 5005</div>
-								</a> <!-- Link for mobile -->
-							</li>
-						</ul>
-					</nav><!-- #primary-menu end -->
+
 				</div>
+
 			</div>
-		</div>
-		<div class="header-wrap-clone"></div>
-	</header><!-- #header end -->
+
+			<div class="header-wrap-clone"></div>
+
+		</header><!-- #header end -->
 	<!-- Content ============================================= -->
 	<form action="" method="post" onsubmit="return validateForm()">
 		<input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token']; ?>">
@@ -502,14 +570,14 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 				<div id="section-content" class="page-section pt-5 mb-0">
 					<div class="container" style="padding-bottom: 120px;">
 						<p>
-						<h2 class="text-start text-md-center font-body mb-6">Quickscan Results: Your organization's AI Transformation Readiness</h2>
+						<h2 class="text-start text-md-center font-body mb-6">AI Readiness Quickscan Results: Your organization's AI Transformation Readiness</h2>
 						</p>
 						<div class="row">
 							<div class="col-7">
 								<?php
 								if ($average_of_all < 35) {
 									$score_blob = "
-										<h4>Lowscore overall</h4>
+										<h4>Low Average Scores overall: This is where you can Improve</h4>
 										<p>On average, your scores indicate there is room for improvement. Below, we will provide some areas to focus on.</p>
 										";
 									echo $score_blob;
@@ -537,7 +605,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 									}
 								} else if ($average_of_all > 35) {
 									$score_blob = "
-										<h4>Highscore overall</h4>
+										<h4>High Averages overall: Your Organization is ready for AI Transformation</h4>
 										<p>On average, your scores can be considered sufficient in terms of maturity. Below, we will provide some highlights and some areas you can consider to improve.</p>
 										";
 									echo $score_blob;
@@ -563,14 +631,8 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 								}
 
 								?>
-								<p>
-									Some generic quick wins given here.
-								</p>
-								<p>
-									[it would be nice to point out 2 elements which score well, =>3] and [not very well, "<3" on average in that segment] </p>
-
 										<p>
-											The above provides an initial grasp of the AI Readiness within your organization. For a free and more detailed Quickscan, please follow the instructions below.
+											The above provides an initial grasp of the AI Readiness within your organization. For a free and more detailed AI Readiness Quickscan Report tailored to your organization, please follow the instructions below.
 										</p>
 							</div>
 							<div class="col-5">
@@ -580,12 +642,12 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 						</div>
 						<div class="row col-mb-50">
 							<div class="col-12">
-								<h3>A Complementary Quickscan Report</h3>
-								<p>Dynaminds offers a tailored, complementary Quickscan Report when you complete the questions in the section below. This personalized report, delivered as a one-pager PDF, is constructed based on the input provided by you, ensuring a reflective analysis of your responses.</p>
-								<p>The report not only encapsulates your input but also integrates sector-specific information, offering a contextual understanding of your standing within your operational sector in terms of AI. Furthermore, the report highlights quick wins, actionable insights that can be readily implemented to garner immediate benefits.</p>
-								<p>By investing a few minutes in answering the questions, you unlock a resource rich with actionable insights tailored to your unique operational context. Take advantage of this opportunity to gain a clearer perspective on your position within your sector and identify quick wins to propel your operations forward.</p>
+								<h3>A Complementary AI Readiness Quickscan Report</h3>
+								<p>Dynaminds offers a tailored, complementary AI Readiness Quickscan Report when you complete the questions in the section below. This personalized report, delivered as a one-pager PDF, is constructed based on the input provided by you, ensuring a reflective analysis of your responses.</p>
+								<p>The report not only encapsulates your input but also integrates sector-specific information, offering a contextual understanding in terms of AI. Furthermore, the report highlights quick wins, actionable insights that can be readily implemented to garner immediate benefits.</p>
+								<p>By investing a few minutes in answering the questions, you receive a resource rich with actionable insights tailored to your unique operational context. Take advantage of this opportunity to gain a clearer perspective on your position within your sector and identify quick wins to propel your operations forward.</p>
 								<p>
-									We're curious if you found the Quickcan Report a useful starting point in your AI transformation journey. We'll provide you an option to let us know if you'd like us to reach out and follow up to discuss your Quickscan after you've received it in your mailbox from us.
+									We're curious if you found the AI Readiness Quickscan Report a useful starting point in your AI transformation journey. We'll provide you an option to let us know if you'd like us to reach out and follow up to discuss your Quickscan after you've received it in your mailbox from us.
 								</p>
 							</div>
 						</div>
@@ -599,7 +661,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 										<div class="col-md-6">
 											<p>
 												<label for="companyName">Company Name:</label><br>
-												<input type="text" id="companyName" class="form-control" name="companyName" placeholder="Enter company name" required>
+												<input type="text" id="companyName" class="form-control" name="companyName" placeholder="Enter company name" required maxlength="40">
 											</p>
 
 										</div>
@@ -612,12 +674,16 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 													<option value="Automotive and Transportation">Automotive and Transportation</option>
 													<option value="Banking, Financial Services, and Insurance">Banking, Financial Services, and Insurance</option>
 													<option value="Construction and Real Estate">Construction and Real Estate</option>
+													<option value="E-commerce and Online Retail">E-commerce and Online Retail</option>
 													<option value="Education and Research">Education and Research</option>
 													<option value="Energy, Utilities, and Mining">Energy, Utilities, and Mining</option>
+													<option value="Environmental and Sustainability">Environmental and Sustainability</option>
 													<option value="Healthcare and Pharmaceuticals">Healthcare and Pharmaceuticals</option>
+													<option value="Hospitality and Tourism">Hospitality and Tourism</option>
 													<option value="Information Technology and Telecommunications">Information Technology and Telecommunications</option>
+													<option value="Logistics and Supply Chain">Logistics and Supply Chain</option>
 													<option value="Manufacturing and Engineering">Manufacturing and Engineering</option>
-													<option value="Media, Entertainment, and Hospitality">Media, Entertainment, and Hospitality</option>
+													<option value="Media and Entertainment">Media and Entertainment</option>
 													<option value="Retail, Wholesale, and Consumer Goods">Retail, Wholesale, and Consumer Goods</option>
 													<option value="Public Sector and Non-Profit">Public Sector and Non-Profit</option>
 													<option value="Other">Other</option>
@@ -628,7 +694,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 									<div class="row">
 										<div class="col-md-6">
 											<p>
-												<label for="email">Email Address to send your report to:</label><br>
+												<label for="email">Email Address to send your Quickscan report to:</label><br>
 												<input type="email" class="form-control" id="email" name="email" placeholder="Enter your business email address" required>
 											</p>
 										</div>
@@ -649,9 +715,9 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 									<div class="row">
 										<div class="col-md-6">
 											<p>
-												<label for="phone">Your phone number: (e.g : 111-111-1111)</label><br>
+												<label for="phone">Your phone number: (e.g : 0612345678 or +31 6 123 456 78)</label><br>
 
-												<input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number" pattern="(\([0-9]{3}\)|[0-9]{3})[ -]?[0-9]{3}[ -]?[0-9]{4}" required>
+												<input type="tel" id="phone" name="phone" class="form-control" placeholder="Enter your phone number">
 												(optional)<br>
 												<input type="checkbox" id="contactPermission" name="contactPermission">
 												<label for="contactPermission"><i>Dynaminds may reach out to discuss the results of my Quickscan.</i></label>
@@ -791,12 +857,12 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 
 
 							<div class="row">
-								<div class="col-md-6" style="text-align: top;">
+								<div class="col-md-7" style="text-align: top;">
 									<div style="padding-top: 10px; padding-bottom: 5px;">
 										Your data will be stored in our database. By submitting your input, you agree with our <a href="privacy-policy.html">Privacy Policy</a>. We promise not share your information with third parties.
 									</div>
 								</div>
-								<div class="col-md-6" style="text-align: right;">
+								<div class="col-md-5" style="text-align: right;">
 									<button type="submit" name="generate-quickscan-submit" class="btn btn-secondary btn-lg mt-3">Generate my Quickscan Report ></button>
 								</div>
 
@@ -857,170 +923,191 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 
 		</section><!-- #content end -->
 	</form>
-	<!-- Footer
+		<!-- Footer
 
 		============================================= -->
 
-	<footer id="footer" style="background-color: #FFF;">
+		<footer id="footer" style="background-color: #FFF;">
 
 
 
-		<div class="container">
+			<div class="container">
 
 
 
-			<!-- Footer Widgets
+
+				<!-- Footer Widgets
 
 				============================================= -->
 
-			<div class="footer-widgets-wrap">
+				<div class="footer-widgets-wrap">
 
-				<div class="row">
-
-
-
-					<div class="col-lg-5">
+					<div class="row">
 
 
 
-						<div class="widget">
+						<div class="col-lg-4">
 
-							<div class="row">
 
-								<div class="col-lg-8 mb-5" style="color:#888; padding-top: 7px;">
 
-									<img src="images/logo-footer.png" alt="Dynaminds Logo" class="d-block mb-4">
+							<div class="widget">
 
-									<p>Dynaminds.ai | The Netherlands
+								<div class="row">
+
+									<div class="col-lg-8 mb-4" style="color:#888; padding-top: 7px;">
+
+										<img src="images/logo-footer.png" alt="Dynaminds Logo" class="d-block mb-4">
+
+										<p>Dynaminds.ai | The Netherlands
 										<br>
 										Copyright &copy; 2023<br>
 										<br>
-									</p>
+										</p>
+
+									</div>
+
 
 								</div>
 
-
 							</div>
+
 
 						</div>
 
 
-					</div>
 
+						<div class="col-lg-8">
 
+							<div class="row g-5">
 
-					<div class="col-lg-7">
+								<div class="col-6 col-lg-3">
 
-						<div class="row g-5">
+									<div class="widget widget_links widget-li-noicon app_landing_widget_link">
 
+										<h4>About</h4>
 
-							<div class="col-6 col-lg-4">
+										<ul>
 
-								<div class="widget widget_links widget-li-noicon app_landing_widget_link">
+											<li><a href="about.html">Our Mission and Values</a></li>
 
-									<h4>About Dynaminds</h4>
-
-
-
-									<ul>
-
-										<li><a href="about.html">Our Mission and Values</a></li>
-
-										<li><a href=mailto:info@dynaminds.ai>Mail us</a></li>
-
-										<li><a href="tel:+31345795005">Call us</a></li>
-
-										<li style="margin-left: -10px;"><a href="https://www.linkedin.com/company/dynaminds-ai" class="social-icon border-transparent si-small me-0 h-bg-linkedin">
+											<li><a href=mailto:info@dynaminds.ai>Mail us</a></li>
+											
+											<li><a href="tel:+31345795005">Call us</a></li>
+											
+											<li style="margin-left: -10px;">
+												<a href="https://www.linkedin.com/company/dynaminds-ai" class="social-icon border-transparent si-small me-0 h-bg-linkedin">
 
 												<i class="fa-brands fa-linkedin"></i>
 
 												<i class="fa-brands fa-linkedin"></i>
-
+												
+												</a>
+												
+												&nbsp;
+												
 												<a href="https://twitter.com/Dynaminds_ai" class="social-icon border-transparent si-small me-0 h-bg-linkedin">
 
-													<i class="fa-brands fa-x-twitter"></i>
+												<i class="fa-brands fa-x-twitter"></i>
 
-													<i class="fa-brands fa-x-twitter"></i>
+												<i class="fa-brands fa-x-twitter"></i>
 
 												</a>
+												
+												&nbsp;
+												
+												<a href="https://wa.me/0649767419" class="social-icon border-transparent si-small me-0 h-bg-linkedin">
+													<i class="fa-brands fa-square-whatsapp"></i>
+													<i class="fa-brands fa-square-whatsapp"></i>
+												</a>
+											</li>
+												
+										</ul>
 
-									</ul>
+									</div>
+
+								</div>
+
+								<div class="col-6 col-lg-3">
+
+									<div class="widget widget_links widget-li-noicon app_landing_widget_link">
+
+										<h4>Our Solutions</h4>
+
+										<ul>
+										
+											<li><a href="state-of-ai-workshop.html">State of AI Workshop</a></li>
+											
+											<li><a href="download/State of AI Workshop - Factsheet (English).pdf">State of AI Workshop: Factsheet</a></li>
+											
+											<li><a href="ai-advisor-to-the-board.html">AI Advisor to the Board</a></li>
+
+											<li><a href="download/AI Advisor to the Board - Factsheet (English).pdf">AI Advisor to the Board: Factsheet</a></li>
+
+										</ul>
+										
+									</div>
+
+								</div>
+
+								<div class="col-6 col-lg-3">
+
+									<div class="widget widget_links widget-li-noicon app_landing_widget_link">
+
+										<h4>Deeper Dive</h4>
+
+										<ul>
+										
+											<li><a href="7-pillars-of-successful-ai-transformation-framework.html">7 Pillars Framework: Explained in Detail</a></li>
+
+											<li><a href="download/7-pillars-framework-one-pager.pdf">7 Pillars Framework: PDF One-pager</a></li>
+
+											<!-- <li><a href="blog.html">Our Blog</a></li> -->
+
+										</ul>
+										
+									</div>
+
+								</div>
+
+								<div class="col-6 col-lg-3">
+
+									<div class="widget widget_links widget-li-noicon app_landing_widget_link">
+
+										<h4>Essentials</h4>
+
+
+										<ul>
+
+											<li><a href="privacy-policy.html">Privacy Policy</a></li>
+
+											<li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
+											
+											<li><a href="disclaimer.html">Disclaimer</a></li>
+
+											<li><a href="non-disclosure.html">Non-Disclosure</a></li>
+
+										</ul>
+
+									</div>
 
 								</div>
 
 							</div>
-
-
-							<div class="col-6 col-lg-4">
-
-								<div class="widget widget_links widget-li-noicon app_landing_widget_link">
-
-									<h4>Deeper Dive</h4>
-
-									<ul>
-										<li><a href="state-of-ai-workshop.html">State of AI Workshop</a></li>
-
-										<li><a href="download/State of AI Workshop - Factsheet (English).pdf">State of AI Workshop Factsheet</a></li>
-
-										<li><a href="ai-advisor-to-the-board.html">AI Advisor to the Board</a></li>
-
-										<li><a href="download/AI Advisor to the Board - Factsheet (English).pdf">AI Advisor to the Board Factsheet</a></li>
-
-										<li><a href="7-pillars-of-successful-ai-transformation-framework.html">7 Pillars Framework: Explained in Detail</a></li>
-
-										<li><a href="download/7-pillars-framework-one-pager.pdf">7 Pillars Framework: PDF One-pager</a></li>
-
-										<!-- <li><a href="blog.html">Our Blog</a></li> -->
-
-									</ul>
-
-								</div>
-
-							</div>
-
-
-							<div class="col-6 col-lg-4">
-
-								<div class="widget widget_links widget-li-noicon app_landing_widget_link">
-
-									<h4>Essentials</h4>
-
-
-
-									<ul>
-
-										<li><a href="privacy-policy.html">Privacy Policy</a></li>
-
-										<li><a href="terms-and-conditions.html">Terms & Conditions</a></li>
-
-										<li><a href="disclaimer.html">Disclaimer</a></li>
-
-										<li><a href="non-disclosure.html">Non-Disclosure</a></li>
-
-									</ul>
-
-								</div>
-
-							</div>
-
-
 
 						</div>
 
+
+
 					</div>
 
-
-
 				</div>
+
+
 
 			</div>
 
 
-
-		</div>
-
-
-	</footer><!-- #footer end -->
+		</footer><!-- #footer end -->
 
 
 	<!-- Go To Top
@@ -1184,6 +1271,9 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 					legend: {
 						display: false,
 					},
+					tooltip: {  // Note the change here from 'tooltips' to 'tooltip' in Chart.js 3.x
+						enabled: false  // Disabling tooltips
+					}
 				}
 			},
 		};
@@ -1201,13 +1291,13 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 		VANTA.WAVES(vantaConfig);
 	</script>
 	<script>
-function sanitizeFileName(fileName) {
-			// Remove special characters, leaving only alphanumeric characters and underscores
-			return fileName.replace(/[^\w]/g, '');
-		}
 		function validatePhoneNumber(phoneNumber) {
+			if(phoneNumber=='')
+			{
+				return true;
+			}
 			// var pattern = /(\([0-9]{3}\)|[0-9]{3})[ -]?[0-9]{3}[ -]?[0-9]{4}/;
-			var pattern = /^(\([0-9]{3}\)|[0-9]{3})[ -]?[0-9]{3}[ -]?[0-9]{4}$/;
+			var pattern = /^\+?[0-9 ]{1,20}$/;
 			return pattern.test(phoneNumber);
 		}
 		function validateCompanyName(companyName) {
@@ -1215,21 +1305,21 @@ function sanitizeFileName(fileName) {
 			// For example, check if the company name is not empty
 			return companyName.trim() !== '';
 		}
-			function validateForm() {
-				var phoneNumber = document.getElementById("phone").value;
-				var companyName = document.getElementById("companyName").value;
-				if (validatePhoneNumber(phoneNumber) && validateCompanyName(companyName)) {
-					return true; // Form will be submitted
-				} else {
-					if (!validatePhoneNumber(phoneNumber)) {
-					alert("Invalid phone number. Phone number must match the pattern.");
-				}
-				if (!validateCompanyName(companyName)) {
-					alert("Invalid company name. Please enter a valid company name.");
-}
-					return false; // Form submission will be prevented
-				}
+		function validateForm() {
+			var phoneNumber = document.getElementById("phone").value;
+			var companyName = document.getElementById("companyName").value;
+			if (validatePhoneNumber(phoneNumber) && validateCompanyName(companyName)) {
+				return true; // Form will be submitted
+			} else {
+				if (!validatePhoneNumber(phoneNumber)) {
+				alert("Invalid phone number. Phone number must match the pattern.");
 			}
+			if (!validateCompanyName(companyName)) {
+				alert("Invalid company name. Please enter a valid company name.");
+			}
+				return false; // Form submission will be prevented
+			}
+		}
 	</script>
 </body>
 </html>

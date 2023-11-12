@@ -1,2 +1,2 @@
-1) Font-size and family of graph changed
-2) undefined key 1 at quick-results.php page fixed
+1) poppins thin font added
+2) adjustments made

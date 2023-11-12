@@ -245,6 +245,7 @@ $pdf = new PDF('P', 'mm', 'A4');
 $pdf->AddFont('Poppins', '', 'Poppins-Regular.php');
 $pdf->AddFont('Poppins', 'B', 'Poppins-Bold.php');
 $pdf->AddFont('Poppins', 'M', 'Poppins-Medium.php');
+$pdf->AddFont('Poppins', 'T', 'Poppins-Thin.php');
 
 $pdf->AddPage();
 $pdf->SetAutoPageBreak(true,0);
@@ -253,10 +254,10 @@ $pdf->SetMargins(0,0,0);
 $x = 10;
 $y = 10;
 $pdf->SetXY($x,$y);
-$pdf->SetFont("Poppins", "", "20");
+$pdf->SetFont("Poppins", "T", "20");
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth = 0, $CellHeight = 0, $text = "AI Readiness Quickscan", $border = 0, $alignment = 'L', $fill = false);
 
-$pdf->Image('output-graph/chart.png',130,6,60,0);
+$pdf->Image('output-graph/chart.png',130,6,65,0);
 
 $pdf->SetFont("Poppins", "", "7");
 
@@ -289,7 +290,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y, $width=100 ,$height=6 ,$text=$text ,$bo
 
 $x = 10;
 $y = $pdf->GetY();
-$text = "This quickscan offers a holistic snapshot of your organization's readiness to integrate AI. The quickscan evaluates 7 aspects of your organization and is based on your responses, combined with the expertise of Dynaminds and your current sector-specific trends.";
+$text = "This Quickscan offers a holistic snapshot of your organization's readiness to integrate AI. It evaluates 7 aspects of your organization and is based on your responses, combined with sector-specific trends and the expertise and insights of Dynaminds. Each segment below starts with a key question underlining the relevance of the individual segment.";
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.7 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
@@ -300,10 +301,10 @@ $x = 22;
 $y = 65;
 $text = "AI Trends";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/aitrends-icon.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/aitrends-icon.png',$x-12,$y+2,8,0);
 $number = $_SESSION['weighted_sum'][0];
 $image_num = is_int($number)? $number : number_format($number, 1);
-$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x+1,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -325,10 +326,10 @@ $x = 22;
 $y = $pdf->GetY()+4;
 $text = "AI Strategy";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/strategy-icon.png',$x-10,$y+0,8,0);
+$pdf->Image('icons/strategy-icon.png',$x-12,$y+0,8,0);
 $number = $_SESSION['weighted_sum'][1];
 $image_num = is_int($number)? $number : number_format($number, 1);
-$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x+1,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -350,10 +351,10 @@ $x = 22;
 $y = $pdf->GetY()+4;
 $text = "Organization";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/organization-icon.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/organization-icon.png',$x-12,$y+2,8,0);
 $number = $_SESSION['weighted_sum'][2];
 $image_num = is_int($number)? $number : number_format($number, 1);
-$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x+1,$y+4,50,0);
 
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
@@ -377,10 +378,10 @@ $x = 22;
 $y = $pdf->GetY()+4;
 $text = "People";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/people-icon.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/people-icon.png',$x-12,$y+2,8,0);
 $number = $_SESSION['weighted_sum'][3];
 $image_num = is_int($number)? $number : number_format($number, 1);
-$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x+1,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -403,10 +404,10 @@ $x = 22;
 $y = $pdf->GetY()+4;
 $text = "Data";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/data-icon.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/data-icon.png',$x-12,$y+2,8,0);
 $number = $_SESSION['weighted_sum'][4];
 $image_num = is_int($number)? $number : number_format($number, 1);
-$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x+1,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -429,10 +430,10 @@ $x = 22;
 $y = $pdf->GetY()+4;
 $text = "Controls";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/controls-icon.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/controls-icon.png',$x-12,$y+2,8,0);
 $number = $_SESSION['weighted_sum'][5];
 $image_num = is_int($number)? $number : number_format($number, 1);
-$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x+1,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -455,10 +456,10 @@ $x = 22;
 $y = $pdf->GetY()+4;
 $text = "Responsible AI";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
-$pdf->Image('icons/responsibleai-icon.png',$x-10,$y+2,8,0);
+$pdf->Image('icons/responsibleai-icon.png',$x-12,$y+2,8,0);
 $number = $_SESSION['weighted_sum'][6];
 $image_num = is_int($number)? $number : number_format($number, 1);
-$pdf->Image("progress_bar_images/{$image_num}.png",$x,$y+4,50,0);
+$pdf->Image("progress_bar_images/{$image_num}.png",$x+1,$y+4,50,0);
 $pdf->SetFont("Poppins", "", "6");
 $x = $pdf->GetX()+10;
 $y = $pdf->GetY();
@@ -481,16 +482,16 @@ insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text 
 $y = $pdf->GetY()+6;
 $pdf->SetFont("Poppins", "", "6");
 $text = "";
-$text  = $ai_goals_text;
-$text .= $organization_knowledge_intensity;
-$text .= $business_sector;
-$text .= $ai_knowledge_board;
+$text  = $ai_goals_text . " ";
+$text .= $organization_knowledge_intensity . " ";
+$text .= $business_sector . " ";
+$text .= $ai_knowledge_board . " ";
 $text .= $end_quote;
 $text = mb_convert_encoding($text, 'ISO-8859-1', 'UTF-8');
 // $text .= mb_convert_encoding("Your organization is adeptly navigating the AI landscape, integrating intelligent solutions that enhance efficiency and innovation. AI is a catalyst in our sector, driving personalized customer experiences and streamlined operations. We've adopted AI to analyze complex data, yielding insights for strategic decisions. Office work intensity has escalated due to AI. Automation optimizes tasks, allowing focus on value-added activities and innovation. AI's role is pivotal; we're evolving with this technology, ensuring alignment with trends and ethical standards. We're committed to evolving with AI, ensuring our strategies align with emerging trends, prioritizing ethical and transparent AI applications. The continuous learning and adaptation fostered by AI is nurturing a culture of perpetual improvement within our organization, stimulating a forward-thinking mindset among our teams. By closely monitoring the evolving AI landscape and actively engaging in community dialogues around responsible AI, we are not only staying ahead of technological advancements but also fostering a robust ethical foundation that underscores our AI-driven initiatives.", 'ISO-8859-1', 'UTF-8');
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 $y = $pdf->GetY()+1;
-$text = "The continuous learning and adaptation fostered by AI is nurturing a culture of perpetual improvement within our organization, stimulating a forward-thinking mindset among our teams. By closely monitoring the evolving AI landscape and actively engaging in community dialogues around responsible AI, we are not only staying ahead of technological advancements but also fostering a robust ethical foundation that underscores our AI-driven initiatives.";
+$text = "How does your organization remain relevant? Challenge your AI transformation readiness with the above framework, in order to prepare your organization for its biggest disruptive innovation it has ever faced.";
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 $pdf->SetFont("Poppins", "B", "7");
@@ -498,24 +499,30 @@ $y = $pdf->GetY()+2;
 $text = "Give direction to your AI transformation journey.";
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
-$pdf->SetFont("Poppins", "", "5");
+$pdf->SetFont("Poppins", "", "6");
 $y = $pdf->GetY()+2;
-$text = "Explanation of the maturity levels used in the graph above: Level 1 - Initial: Minimal engagement with AI, characterized by a lack of awareness or understanding. Level 2 - Aware: Basic awareness of AI exists, but no structured initiatives are in place. Level 3 - Operational: AI initiatives are operational with a defined strategy, delivering initial value. Level 4 - Integrated: AI is well-integrated across functions, with growing expertise and value realization. Level 5 - Optimized: AI within your organization is optimized, driving innovation, and is a core part of organizational strategy, delivering significant value.";
-insert_MultiCell($pdf, $X = $x, $Y = $y, $width=150 ,$height=2.8 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
+$text = "Dynaminds is a Netherlands-based company which specializes in AI transformation advisory services. It has a primary focus on guiding organizations through their AI journey, leveraging an innovative framework known as the 7 Pillars of Successful AI Transformation Framework. Dynaminds offers workshops for executives and an AI Advisor to the Board service, acting as a strategic partner and continuous driver of organizational AI transformation.";
+insert_MultiCell($pdf, $X = $x, $Y = $y, $width=190 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
+
+$pdf->SetFont("Poppins", "", "4");
+$y = $pdf->GetY()+2;
+$text = "Explanation of the maturity levels of the chart: Level 1 - Initial: Organizations begin exploring AI, with limited awareness and minimal AI strategy. Level 2 - Developing: Growing awareness of AI's potential, with efforts to align AI with business strategies, though not fully structured or integrated. Level 3 - Defined: Operational AI initiatives with clear strategy and organizational alignment, increasingly utilizing data and human resources. Level 4 - Managed: AI integrated across functions, focusing on enhancing AI capabilities, data use, and staff development. Level 5 - Optimized: AI is central to organizational strategy, driving innovation and delivering significant value. Dynaminds periodically updates the content on which this Quickscan is based, including new insights and advice. Last update: 12th of November, 2023.";
+insert_MultiCell($pdf, $X = $x, $Y = $y, $width=150 ,$height=2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
-$pdf->Image('images/logo.png',168,$y-7,30);
+$pdf->Image('images/logo.png',168,$y-5,30);
 // $y = $pdf->GetY()+2;
 $pdf->SetFont("Poppins", "", "6");
-$text = " A holistic approach to AI Transformation within your business.
+$text = " A holistic approach to AI Transformation.
 www.dynaminds.ai | info@dynaminds.ai ";
-insert_MultiCell($pdf, $X = 160, $Y = $y+7, $width=45 ,$height=2.8 ,$text=$text ,$border=0 ,$alignment='C' ,$fill=false);
+insert_MultiCell($pdf, $X = 160, $Y = $y+7, $width=45 ,$height=2 ,$text=$text ,$border=0 ,$alignment='C' ,$fill=false);
 
 
 $sanitizedcompanyName = sanitizeFileName($companyName);
-$filename = "outputs/Dynaminds_AI_Quickscan_{$sanitizedcompanyName}.pdf";
+$filename = "Dynaminds_AI_Quickscan_{$sanitizedcompanyName}.pdf";
+$Fullfilename = "outputs/".$filename;
 // $filename = "outputs/Dynaminds_AI_Quickscan_{$companyName}.pdf";
-$pdf->Output("F", $filename);
+$pdf->Output("F", $Fullfilename);
 
 
 
@@ -560,21 +567,21 @@ $mail->addAddress($receiver_mail);
 $mail->isHTML(true);
 
 // Mail subject 
-$mail->Subject = 'Test Mail with Attachment';
+$mail->Subject = 'Your AI Readiness Quickscan';
 
 // Mail body content 
 $bodyContent = '<p>Dear Reader,</p><br>';
-$bodyContent .= "<p>I hope this message finds you well. Herewith, you’ll receive the AI Quickscan results based on the input you provided us. The Quickscan is a one-pager that outlines key insights and potential opportunities tailored for you.</p>";
+$bodyContent .= "<p>Herewith, you will receive your personalized AI Readiness Quickscan based on the input you provided us. The AI Readiness Quickscan is a one-pager that outlines key insights and potential opportunities tailored for your organization and your sector.</p>";
 $bodyContent .= "<p><strong>Attachment:</strong> {$filename}</p>";
-$bodyContent .= "<p>This one-pager is designed to give you a concise yet comprehensive view of the current AI landscape as it applies to your specific context.</p>";
-$bodyContent .= "<p>We believe that the AI Quickscan will provide you with valuable insights and a clear direction on how to proceed with AI initiatives in your organization. It is formatted for easy sharing, should you wish to discuss the contents with your team.</p>";
-$bodyContent .= "<p>Should you have any questions, or if you would like to schedule a follow-up discussion to delve deeper into any aspect of the report, do not hesitate to contact us. If you indicated you would like us to contact you to discuss the results, we will do so in the following 3 workdays. </p>";
-$bodyContent .= "<p>We are here to assist you in unlocking the full potential of AI for your business.</p>";
-$bodyContent .= "<p>Thank you for engaging with our services. We look forward to supporting you on your AI journey.</p><br>";
+$bodyContent .= "<p>This one-pager is designed to give you a concise yet comprehensive view of the current AI Readiness as it applies to your specific organization.</p>";
+$bodyContent .= "<p>We believe that this AI Readiness Quickscan will provide you with valuable insights and a clear initial direction on how to proceed with AI initiatives in your organization.</p>";
+$bodyContent .= "<p><b>A deeper discussion</b><br>AI and its disruptive force can be a daunting topic for organizations to assess the impact of. The presented Quickscan functions as a initial conversation starter within your organization. Deeper understanding of the impact of AI, and what it means for your organization, merits a deeper discussion. Should you have any questions, or if you would like to schedule a follow-up meeting to delve deeper into any aspect of the Quickscan or the implications of AI, do not hesitate to contact us. If you indicated you would like us to contact you to discuss the results, we will do so in the following 3 workdays on the provided mail address or phone number.</p>";
+$bodyContent .= "<p>Thank you for engaging with our services. We look forward to supporting you on your AI transformation journey.</p><br>";
 
 $bodyContent .= "<p>Warm regards,</p>";
 $bodyContent .= "<p>Rob Braun</p>";
-$bodyContent .= "<p>CEO Dynaminds</p>";
+$bodyContent .= "<p><b>Dynaminds</b><br><i>Passionate AI Enablers</i><br>www.dynaminds.ai | The Netherlands | +31 345 79 5005<br>State of AI Workshops for Executives | AI Advisor to the Board</p>";
+
 
 $mail->Body    = $bodyContent;
 
@@ -585,17 +592,17 @@ $mail->addAttachment($filename);
 // Send email 
 if (!$mail->send()) {
     $_SESSION['msg-type'] = "danger";
-    $_SESSION['msg-text'] = "Message could not be sent.";
+    $_SESSION['msg-text'] = "Unfortunately, something went wrong. Please let us know by sending us an email at info@dynaminds.ai.";
     // echo 'Message could not be sent. Mailer Error: ' . $mail->ErrorInfo;
     // return false;
 } else {
     $_SESSION['msg-type'] = "success";
-    $_SESSION['msg-text'] = "Message has been sent.";
+    $_SESSION['msg-text'] = "Your <b>AI Readiness Quickscan</b> has been generated successfully<br>and sent to the provided email address.";
     // echo 'Message has been sent.'; 
     // return true;
 }
 
 
-unlink($filename);
+unlink($Fullfilename);
 
 echo "<script>window.location.replace('end.php')</script>";
