@@ -1292,7 +1292,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 	</script>
 	<script>
 		function validatePhoneNumber(phoneNumber) {
-			if(phoneNumber=='')
+if(phoneNumber=='')
 			{
 				return true;
 			}

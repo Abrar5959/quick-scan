@@ -257,7 +257,7 @@ $pdf->SetXY($x,$y);
 $pdf->SetFont("Poppins", "T", "20");
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth = 0, $CellHeight = 0, $text = "AI Readiness Quickscan", $border = 0, $alignment = 'L', $fill = false);
 
-$pdf->Image('output-graph/chart.png',130,6,65,0);
+$pdf->Image('output-graph/chart.png',130,0,65,0);
 
 $pdf->SetFont("Poppins", "", "7");
 
@@ -298,7 +298,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y, $width=120 ,$height=3.7 ,$text=$text ,$
 
 $pdf->SetFont("Poppins", "", "10");
 $x = 22;
-$y = 65;
+$y = 60;
 $text = "AI Trends";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/aitrends-icon.png',$x-12,$y+2,8,0);
@@ -323,7 +323,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$tex
 
 $pdf->SetFont("Poppins", "", "10");
 $x = 22;
-$y = $pdf->GetY()+4;
+$y = $pdf->GetY()+3;
 $text = "AI Strategy";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/strategy-icon.png',$x-12,$y+0,8,0);
@@ -348,7 +348,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.3, $width=120 ,$height=3.2 ,$text=$tex
 
 $pdf->SetFont("Poppins", "", "10");
 $x = 22;
-$y = $pdf->GetY()+4;
+$y = $pdf->GetY()+3;
 $text = "Organization";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/organization-icon.png',$x-12,$y+2,8,0);
@@ -375,7 +375,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$tex
 
 $pdf->SetFont("Poppins", "", "10");
 $x = 22;
-$y = $pdf->GetY()+4;
+$y = $pdf->GetY()+3;
 $text = "People";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/people-icon.png',$x-12,$y+2,8,0);
@@ -401,7 +401,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$tex
 
 $pdf->SetFont("Poppins", "", "10");
 $x = 22;
-$y = $pdf->GetY()+4;
+$y = $pdf->GetY()+3;
 $text = "Data";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/data-icon.png',$x-12,$y+2,8,0);
@@ -427,7 +427,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$tex
 
 $pdf->SetFont("Poppins", "", "10");
 $x = 22;
-$y = $pdf->GetY()+4;
+$y = $pdf->GetY()+3;
 $text = "Controls";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/controls-icon.png',$x-12,$y+2,8,0);
@@ -453,7 +453,7 @@ insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$tex
 
 $pdf->SetFont("Poppins", "", "10");
 $x = 22;
-$y = $pdf->GetY()+4;
+$y = $pdf->GetY()+3;
 $text = "Responsible AI";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $pdf->Image('icons/responsibleai-icon.png',$x-12,$y+2,8,0);
@@ -474,9 +474,11 @@ $pdf->SetFont("Poppins", "", "6");
 $text = "                                ".$suggestion_blobs[6];
 insert_MultiCell($pdf, $X = $x, $Y = $y+0.2, $width=120 ,$height=3.2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
+// ===============================
+
 $pdf->SetFont("Poppins", "B", "10");
 $x = 8;
-$y = $pdf->GetY()+4;
+$y = $pdf->GetY()+3;
 $text = "AI Impact on your organization";
 insert_cell($pdf, $X = $x, $Y = $y, $CellWidth=50 ,$CellHeight=3.7 ,$text=$text ,$border=0 , $alignment='L' ,   $fill=false);
 $y = $pdf->GetY()+6;
@@ -510,7 +512,7 @@ $text = "Explanation of the maturity levels of the chart: Level 1 - Initial: Org
 insert_MultiCell($pdf, $X = $x, $Y = $y, $width=150 ,$height=2 ,$text=$text ,$border=0 ,$alignment='L' ,$fill=false);
 
 
-$pdf->Image('images/logo.png',168,$y-5,30);
+$pdf->Image('images/logo.png',168,$y-7,30);
 // $y = $pdf->GetY()+2;
 $pdf->SetFont("Poppins", "", "6");
 $text = " A holistic approach to AI Transformation.
@@ -522,7 +524,7 @@ $sanitizedcompanyName = sanitizeFileName($companyName);
 $filename = "Dynaminds_AI_Quickscan_{$sanitizedcompanyName}.pdf";
 $Fullfilename = "outputs/".$filename;
 // $filename = "outputs/Dynaminds_AI_Quickscan_{$companyName}.pdf";
-$pdf->Output("F", $Fullfilename);
+$pdf->Output("I", $Fullfilename);
 
 
 
@@ -587,7 +589,7 @@ $mail->Body    = $bodyContent;
 
 
 // Add the attachment
-$mail->addAttachment($filename);
+$mail->addAttachment($Fullfilename);
 
 // Send email 
 if (!$mail->send()) {
