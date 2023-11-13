@@ -524,7 +524,7 @@ $sanitizedcompanyName = sanitizeFileName($companyName);
 $filename = "Dynaminds_AI_Quickscan_{$sanitizedcompanyName}.pdf";
 $Fullfilename = "outputs/".$filename;
 // $filename = "outputs/Dynaminds_AI_Quickscan_{$companyName}.pdf";
-$pdf->Output("I", $Fullfilename);
+$pdf->Output("F", $Fullfilename);
 
 
 

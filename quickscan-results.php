@@ -573,7 +573,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 						<h2 class="text-start text-md-center font-body mb-6">AI Readiness Quickscan Results: Your organization's AI Transformation Readiness</h2>
 						</p>
 						<div class="row">
-							<div class="col-7">
+							<div class="col-sm-7">
 								<?php
 								if ($average_of_all < 35) {
 									$score_blob = "
@@ -635,7 +635,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 											The above provides an initial grasp of the AI Readiness within your organization. For a free and more detailed AI Readiness Quickscan Report tailored to your organization, please follow the instructions below.
 										</p>
 							</div>
-							<div class="col-5">
+							<div class="col-sm-5">
 								<canvas id="myChart"></canvas>
 								<!-- <img src="images/quickscan-chart-demo.png" alt="Polar Chart"> -->
 							</div>
