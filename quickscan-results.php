@@ -417,6 +417,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 </head>
 
 <body class="stretched">
+		<canvas class="myChart" style="display: none;width:500px;height:500px"></canvas>
 		<!-- Header
 
 		============================================= -->
@@ -636,7 +637,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 										</p>
 							</div>
 							<div class="col-sm-5">
-								<canvas id="myChart"></canvas>
+								<canvas class="myChart"></canvas>
 								<!-- <img src="images/quickscan-chart-demo.png" alt="Polar Chart"> -->
 							</div>
 						</div>
@@ -1237,18 +1238,60 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 			]
 		};
 
-		const config = {
+		const config1 = {
 			type: 'polarArea',
 			data: data,
 			options: {
+				maintainAspectRatio: false,
+		        responsive: false,
 				animation: {
 					onComplete: function() {
 						// imageData = myChart.toBase64Image();
-						imageData = myChart.toBase64Image('image/png', 1);
+						imageData = myChart1.toBase64Image('image/png', 1);
 						
 						saveChartAsImage(imageData);
 					}
 				},
+				// responsive: true,
+				scales: {
+					r: {
+						max: 50,
+						ticks: {
+							display: false,
+							stepSize: 10 // This will show grid lines at intervals of 10
+						},
+						pointLabels: {
+							display: true,
+							centerPointLabels: true,
+							font: {
+								family: 'Poppins',  // Set the font family to Poppins
+								size: 16
+							}
+						}
+					}
+				},
+				plugins: {
+					legend: {
+						display: false,
+					},
+					tooltip: {  // Note the change here from 'tooltips' to 'tooltip' in Chart.js 3.x
+						enabled: false  // Disabling tooltips
+					}
+				}
+			},
+		};
+		const config2 = {
+			type: 'polarArea',
+			data: data,
+			options: {
+				// animation: {
+				// 	onComplete: function() {
+				// 		// imageData = myChart.toBase64Image();
+				// 		imageData = myChart.toBase64Image('image/png', 1);
+						
+				// 		saveChartAsImage(imageData);
+				// 	}
+				// },
 				responsive: true,
 				scales: {
 					r: {
@@ -1278,8 +1321,10 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 			},
 		};
 
-		const ctx = document.getElementById('myChart').getContext('2d');
-		const myChart = new Chart(ctx, config);
+		const ctx1 = document.getElementsByClassName('myChart')[0].getContext('2d');
+		const ctx2 = document.getElementsByClassName('myChart')[1].getContext('2d');
+		const myChart1 = new Chart(ctx1, config1);
+		const myChart2 = new Chart(ctx2, config2);
 	</script>
 
 	<script src="js/functions.js"></script>
@@ -1292,7 +1337,7 @@ if (isset($_POST['step1']) or isset($_SESSION['pillarArray'])) {
 	</script>
 	<script>
 		function validatePhoneNumber(phoneNumber) {
-if(phoneNumber=='')
+			if(phoneNumber=='')
 			{
 				return true;
 			}
