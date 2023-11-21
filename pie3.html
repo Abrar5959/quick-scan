@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polar Chart with Centered Labels</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div style="width: 300px; height: 300px;">
+  <canvas id="myChart"></canvas>
+</div>
+
+
+<input type="hidden" id="data-input" value="12,49,18,25,33,29,45">
+
+<script>
+  const dataInput = document.getElementById('data-input').value;
+  const dataValues = dataInput.split(',').map(Number);
+
+const data = {
+  labels: ['AI Trends', 'AI Strategy', 'Organization', 'People', 'Data', 'Controls', 'Responsible AI'],
+  datasets: [
+    {
+      label: 'Dataset 1',
+      data: dataValues.map(value => value > 10 ? 10 : value),  // This line computes the value for each segment
+      backgroundColor: [
+        'rgba(0, 32, 96)',
+        'rgba(0, 32, 96)',
+        'rgba(0, 32, 96)',
+        'rgba(0, 32, 96)',
+        'rgba(0, 32, 96)',
+        'rgba(0, 32, 96)',
+        'rgba(0, 32, 96)'
+      ]
+    },
+	    {
+      label: 'Dataset 2',
+      data: dataValues.map(value => (value > 20 ? 20 : value)),
+
+      backgroundColor: [
+		'rgba(45, 72, 128)',
+		'rgba(45, 72, 128)',
+		'rgba(45, 72, 128)',
+		'rgba(45, 72, 128)',
+		'rgba(45, 72, 128)',
+		'rgba(45, 72, 128)',
+		'rgba(45, 72, 128)'
+      ]
+    },
+	    {
+      label: 'Dataset 3',
+      data: dataValues.map(value => (value > 30 ? 30 : value)),
+      backgroundColor: [
+        'rgba(91, 111, 160)',
+		'rgba(91, 111, 160)',
+		'rgba(91, 111, 160)',
+		'rgba(91, 111, 160)',
+		'rgba(91, 111, 160)',
+		'rgba(91, 111, 160)',
+		'rgba(91, 111, 160)'
+      ]
+    },
+	    {
+      label: 'Dataset 4',
+      data: dataValues.map(value => (value > 40 ? 40 : value)),
+      backgroundColor: [
+        'rgba(136, 151, 192)',
+		'rgba(136, 151, 192)',
+		'rgba(136, 151, 192)',
+		'rgba(136, 151, 192)',
+		'rgba(136, 151, 192)',
+		'rgba(136, 151, 192)',
+		'rgba(136, 151, 192)',
+		'rgba(136, 151, 192)'
+      ]
+    },
+	    {
+      label: 'Dataset 5',
+		data: dataValues.map(value => (value >= 40 && value <= 50 ? value : null)),
+      backgroundColor: [
+        'rgba(182, 191, 209)',
+        'rgba(182, 191, 209)',
+        'rgba(182, 191, 209)',
+        'rgba(182, 191, 209)',
+        'rgba(182, 191, 209)',
+        'rgba(182, 191, 209)',
+        'rgba(182, 191, 209)'
+      ]
+    },
+  ]
+};
+
+const config = {
+  type: 'polarArea',
+  data: data,
+  options: {
+    responsive: true,
+	scales: {
+	  r: {
+		max: 50,
+		ticks: {
+		  display: false,
+		  stepSize: 10  // This will show grid lines at intervals of 10
+		},
+		pointLabels: {
+		  display: true,
+		  centerPointLabels: true,
+		  font: {
+			size: 10
+		  }
+		}
+	  }
+	},
+    plugins: {
+      legend: {
+        display: false,
+      },
+    }
+  },
+};
+
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, config);
+</script>
+
+</body>
+</html>
